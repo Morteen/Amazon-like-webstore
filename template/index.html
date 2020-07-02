@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <title>Amazona</title>
+  </head>
+
+  <body>
+    <div class="grid-container">
+      <header class="header">
+        <div class="brand">
+          <button onclick="openMenu()">
+            &#9776;
+          </button>
+          <a href="index.html">Amazona</a>
+        </div>
+        <div class="header-links">
+          <a href="signin.html">Sign In</a>
+          <a href="cart.html"> Cart</a>
+        </div>
+      </header>
+      <aside class="sidebar" style="display: none;" id="mySidebar">
+        <h3>kategorier</h3>
+        <button class="sidebar-close-button" onclick="closeMenu()">x</button>
+        <ul>
+          <li><a href="index.html"> Skjorter</a></li>
+          <li><a href="index.html"> Bukser</a></li>
+        </ul>
+      </aside>
+
+      <main class="main">
+        <div class="content">
+          <ul class="products">
+            <li class="product">
+              <img src="./images/d1.jpg" alt="Product" class="product-image" />
+              <div clas="product-name">
+                <a href="#"> Test navn</a>
+              </div>
+              <div class="product-brand">Nice</div>
+              <div class="product-price">60</div>
+              <div class="product-rating">4.5 stjerner (110 anmeldelser)</div>
+            </li>
+            <li class="product">
+              <img src="./images/d1.jpg" alt="Product" class="product-image" />
+              <div clas="product-name">
+                <a href="#"> Test navn</a>
+              </div>
+              <div class="product-brand">Nice</div>
+              <div class="product-price">60</div>
+              <div class="product-rating">4.5 stjerner (110 anmeldelser)</div>
+            </li>
+            <li class="product">
+              <img src="./images/d1.jpg" alt="Product" class="product-image" />
+              <div clas="product-name">
+                <a href="#"> Test navn</a>
+              </div>
+              <div class="product-brand">Nice</div>
+              <div class="product-price">60</div>
+              <div class="product-rating">4.5 stjerner (110 anmeldelser)</div>
+            </li>
+            <li class="product">
+              <img src="./images/d1.jpg" alt="Product" class="product-image" />
+              <div clas="product-name">
+                <a href="#"> Test navn</a>
+              </div>
+              <div class="product-brand">Nice</div>
+              <div class="product-price">60</div>
+              <div class="product-rating">4.5 stjerner (110 anmeldelser)</div>
+            </li>
+            <li class="product">
+              <img src="./images/d1.jpg" alt="Product" class="product-image" />
+              <div clas="product-name">
+                <a href="#"> Test navn</a>
+              </div>
+              <div class="product-brand">Nice</div>
+              <div class="product-price">60</div>
+              <div class="product-rating">4.5 stjerner (110 anmeldelser)</div>
+            </li>
+            <li class="product">
+              <img src="./images/d1.jpg" alt="Product" class="product-image" />
+              <div clas="product-name">
+                <a href="#"> Test navn</a>
+              </div>
+              <div class="product-brand">Nice</div>
+              <div class="product-price">60</div>
+              <div class="product-rating">4.5 stjerner (110 anmeldelser)</div>
+            </li>
+            <li class="product">
+              <img src="./images/d1.jpg" alt="Product" class="product-image" />
+              <div clas="product-name">
+                <a href="#"> Test navn</a>
+              </div>
+              <div class="product-brand">Nice</div>
+              <div class="product-price">60</div>
+              <div class="product-rating">4.5 stjerner (110 anmeldelser)</div>
+            </li>
+            <li class="product">
+              <img src="./images/d1.jpg" alt="Product" class="product-image" />
+              <div clas="product-name">
+                <a href="#"> Test navn</a>
+              </div>
+              <div class="product-brand">Nice</div>
+              <div class="product-price">60</div>
+              <div class="product-rating">4.5 stjerner (110 anmeldelser)</div>
+            </li>
+          </ul>
+        </div>
+      </main>
+      <footer class="footer">
+        <p>utvikler Morten</p>
+      </footer>
+    </div>
+    <script>
+      function closeMenu() {
+        document.getElementById("mySidebar").style.display = "none";
+      }
+      function openMenu() {
+        document.getElementById("mySidebar").style.display = "block";
+      }
+    </script>
+  </body>
+</html>
