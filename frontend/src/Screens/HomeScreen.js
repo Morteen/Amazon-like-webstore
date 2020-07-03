@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { listProducts } from "../actions/productAction";
 
 function HomeScreen(props) {
-  const [products, setproduct] = useState([]);
+  const productList = useSelector((state) => state.productList);
+  const { products, loading, error } = productList;
+  const dispatch = useDispatch();
   useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await axios.get(
-        "/api/products" //Henter data fra serveren
-      );
-      console.log(data);
-      setproduct(data);
-    };
-    fetchData();
+    dispatch(listProducts());
     return () => {
       "";
     };
   }, []);
 
-  return (
+  return loading ? (
+    //Loading må være med her siden det er asynk og man får undifined feil på map funksjonen
+    <div>Loading....</div>
+  ) : error ? (
+    <div>{error}</div>
+  ) : (
     <ul className="products">
       {products.map((product, index) => (
         <li className="product" key={index}>
