@@ -1,0 +1,57 @@
+export default {
+  products: [
+    {
+      _id: "1",
+      name: "Slim shirt",
+      category: "shirt",
+      image: "/images/d1.jpg",
+      price: 60,
+      brand: "Nike",
+      rating: 4.0,
+      numRew: 10,
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry",
+    },
+    {
+      _id: "2",
+      name: "Big shirt",
+      category: "shirt",
+      image: "/images/d1.jpg",
+      price: 60,
+      brand: "Nike",
+      rating: 4.0,
+      numRew: 10,
+    },
+
+    {
+      _id: "3",
+      name: "Slim shirt",
+      category: "shirt",
+      image: "/images/d1.jpg",
+      price: 80,
+      brand: "Addidas",
+      rating: 1.0,
+      numRew: 100,
+    },
+    {
+      _id: "4",
+      name: "Slim shirt",
+      category: "shirt",
+      image: "/images/d1.jpg",
+      price: 80,
+      brand: "Addidas",
+      rating: 1.0,
+      numRew: 100,
+    },
+    {
+      _id: "5",
+      name: "Extra big shirt",
+      category: "shirt",
+      image: "/images/d1.jpg",
+      price: 80,
+      brand: "Dressman",
+      rating: 3.0,
+      numRew: 900,
+    },
+  ],
+};

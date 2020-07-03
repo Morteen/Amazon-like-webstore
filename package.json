@@ -1,0 +1,30 @@
+{
+  "name": "amazon-like-webstore",
+  "version": "1.0.0",
+  "description": "Amasone server",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --watch backend --exec babel-node backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Morteen/Amazon-like-webstore.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Morteen/Amazon-like-webstore/issues"
+  },
+  "homepage": "https://github.com/Morteen/Amazon-like-webstore#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/node": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "babel-core": "^7.0.0-bridge.0",
+    "nodemon": "^2.0.4"
+  }
+}
