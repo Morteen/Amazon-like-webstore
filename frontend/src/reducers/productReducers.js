@@ -22,7 +22,6 @@ function productListReducer(state = { products: [] }, action) {
 }
 
 function productDetailsReducer(state = { product: {} }, action) {
-  console.log("Log fra reducer  " + action.type + "  " + action.payload);
   switch (action.type) {
     case PRODUCT_DETAILS_REQUEST:
       return { loading: true };

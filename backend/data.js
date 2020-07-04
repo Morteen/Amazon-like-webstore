@@ -9,6 +9,7 @@ export default {
       brand: "Nike",
       rating: 4.0,
       numRew: 10,
+      countInStock: 0,
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry",
     },
@@ -21,6 +22,8 @@ export default {
       brand: "Nike",
       rating: 4.0,
       numRew: 10,
+      countInStock: 2,
+      description: "Lorem Ipsum is simply dummy text ",
     },
 
     {
@@ -32,6 +35,8 @@ export default {
       brand: "Addidas",
       rating: 1.0,
       numRew: 100,
+      countInStock: 10,
+      description: "Lorem Ipsum",
     },
     {
       _id: "4",
@@ -42,6 +47,8 @@ export default {
       brand: "Addidas",
       rating: 1.0,
       numRew: 100,
+      countInStock: 8,
+      description: "Test beskrivelse",
     },
     {
       _id: "5",
@@ -52,6 +59,9 @@ export default {
       brand: "Dressman",
       rating: 3.0,
       numRew: 900,
+      countInStock: 10,
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
     },
     {
       _id: "6",
@@ -62,6 +72,9 @@ export default {
       brand: "Dressman",
       rating: 5.0,
       numRew: 900,
+      countInStock: 9,
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry",
     },
   ],
 };
