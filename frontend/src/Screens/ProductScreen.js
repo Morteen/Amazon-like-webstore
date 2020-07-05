@@ -46,6 +46,7 @@ function ProductScreen(props) {
               <li>
                 Pris:<b> {product.price}</b>kr
               </li>
+              <li></li>
               <li>
                 Beskrivelse
                 <div>{product.description}</div>
@@ -56,7 +57,10 @@ function ProductScreen(props) {
           <div className="details-action">
             <ul>
               <li>Pris:{product.price}</li>
-              <li>Status:{product.status}</li>
+              <li>
+                Status:{" "}
+                {product.countInStock > 0 ? " På lager" : "Ikke på lager"}{" "}
+              </li>
               <li>
                 Antall:
                 <select
@@ -73,13 +77,10 @@ function ProductScreen(props) {
                 </select>
               </li>
               <li>
-                {product.countInStock > 0 ? (
+                {product.countInStock > 0 && (
                   <button className="button primary" onClick={handleAddToCart}>
-                    {" "}
-                    Legg til i vognen{" "}
+                    Legg til i vognen
                   </button>
-                ) : (
-                  <div>Denne varen er ikke på lager</div>
                 )}
               </li>
             </ul>
