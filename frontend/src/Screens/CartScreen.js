@@ -15,8 +15,10 @@ function CartScreen(props) {
   const dispatch = useDispatch();
 
   const removeFromCartHandler = (productId) => {
-    console.log("Log av productId " + productId);
     dispatch(removeFromCart(productId));
+  };
+  const checkOutHandler = () => {
+    props.history.push("/sigin?redirect=shipping");
   };
 
   useEffect(() => {
@@ -31,7 +33,7 @@ function CartScreen(props) {
         <ul className="cart-list-container">
           <li>
             <h3>Handlevogn</h3>
-            <div>Pris</div>
+            <div>Pris pr stykk</div>
           </li>
 
           {cartItems.length === 0 ? (
@@ -49,11 +51,17 @@ function CartScreen(props) {
 
                   <div>
                     Antall
-                    <select>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
+                    <select
+                      value={item.qty}
+                      onChange={(e) =>
+                        dispatch(addToCart(item.product, e.target.value))
+                      }
+                    >
+                      {[...Array(item.countInStock).keys()].map((x) => (
+                        <option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </option>
+                      ))}
                     </select>
                     {console.log(
                       "Log av items.product fra cartScreen " + item.product
@@ -67,7 +75,7 @@ function CartScreen(props) {
                     </button>
                   </div>
                 </div>
-                <div className="cart-price">{item.price}</div>
+                <div className="cart-price">{item.price} </div>
               </li>
             ))
           )}
@@ -78,8 +86,12 @@ function CartScreen(props) {
           Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} varer) : Sum:{" "}
           {cartItems.reduce((a, c) => a + c.price * c.qty, 0)} kr
         </h3>
-        <button className="button primary" disabled={cartItems.length === 0}>
-          Forttsett til Betaling
+        <button
+          className="button primary full-width"
+          onClick={checkOutHandler}
+          disabled={cartItems.length === 0}
+        >
+          Fortsett til Betaling
         </button>
       </div>
     </div>
