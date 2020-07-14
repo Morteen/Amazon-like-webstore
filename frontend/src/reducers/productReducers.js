@@ -5,12 +5,15 @@ import {
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAIL_FAIL,
+  PRODUCT_SAVE_SUCCESS,
+  PRODUCT_SAVE_REQUEST,
+  PRODUCT_SAVE_FAIL,
 } from "../constants/productConstants";
 
 function productListReducer(state = { products: [] }, action) {
   switch (action.type) {
     case PRODUCT_LIST_REQUST:
-      return { loading: true };
+      return { loading: true, products: [] };
     case PRODUCT_LIST_SUCCESS:
       return { loading: false, products: action.payload };
     case PRODUCT_LIST_FAIL:
@@ -34,5 +37,18 @@ function productDetailsReducer(state = { product: {} }, action) {
       return state;
   }
 }
+function productSaveReducer(state = { product: {} }, action) {
+  switch (action.type) {
+    case PRODUCT_SAVE_REQUEST:
+      return { loading: true };
+    case PRODUCT_SAVE_SUCCESS:
+      return { loading: false, sucess: true, product: action.payload };
+    case PRODUCT_SAVE_FAIL:
+      return { loading: false, error: action.payload };
 
-export { productListReducer, productDetailsReducer };
+    default:
+      return state;
+  }
+}
+
+export { productListReducer, productDetailsReducer, productSaveReducer };

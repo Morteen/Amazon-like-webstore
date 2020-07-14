@@ -11,8 +11,14 @@ import {
 
 const sigin = (email, password) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
+
   try {
-    const { data } = await Axios.post("/api/users/signin", { email, password });
+    const { data } = await Axios.get(
+      "http://localhost:51031/api/User/User?email=" +
+        email +
+        "&password=" +
+        password
+    );
     dispatch({ type: USER_SIGIN_SUCCESS, payload: data });
     Cookie.set("userInfo", JSON.stringify(data));
   } catch (error) {
@@ -23,11 +29,14 @@ const sigin = (email, password) => async (dispatch) => {
 const register = (name, email, password) => async (dispatch) => {
   dispatch({ type: USER_REGISTER_REQUEST, payload: { name, email, password } });
   try {
-    const { data } = await Axios.post("/api/users/register", {
-      name,
-      email,
-      password,
-    });
+    const { data } = await Axios.post(
+      "http://localhost:51031/api/User?name=" +
+        name +
+        "&email=" +
+        email +
+        "&password=" +
+        password
+    );
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
     Cookie.set("userInfo", JSON.stringify(data));
   } catch (error) {

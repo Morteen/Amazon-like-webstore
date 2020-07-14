@@ -33,6 +33,7 @@ function ProductScreen(props) {
         <div className="details">
           <div className="details-image">
             <img src={product.image} alt="Product" />
+            {console.log(product.image)}
           </div>
           <div className="details-info">
             <ul>
