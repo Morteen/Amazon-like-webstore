@@ -5,7 +5,10 @@ import { addToCart, removeFromCart } from "../actions/cartActions";
 
 function CartScreen(props) {
   const cart = useSelector((state) => state.cart);
+
   const { cartItems } = cart;
+  const userSignin = useSelector((state) => state.userSignin);
+
   const productId = props.match.params.id;
   const qty = props.location.search
     ? Number(props.location.search.split("=")[1])
@@ -18,7 +21,11 @@ function CartScreen(props) {
     dispatch(removeFromCart(productId));
   };
   const checkOutHandler = () => {
-    props.history.push("/sigin?redirect=shipping");
+    if (userSignin.userInfo) {
+      props.history.push("/shipping");
+    } else {
+      props.history.push("/signin");
+    }
   };
 
   useEffect(() => {
@@ -39,8 +46,8 @@ function CartScreen(props) {
           {cartItems.length === 0 ? (
             <div>Vognen er tom</div>
           ) : (
-            cartItems.map((item) => (
-              <li>
+            cartItems.map((item, index) => (
+              <li key={index}>
                 <div className="cart-image">
                   <img src={item.image} alt="Produkt" />
                 </div>
@@ -63,9 +70,6 @@ function CartScreen(props) {
                         </option>
                       ))}
                     </select>
-                    {console.log(
-                      "Log av items.product fra cartScreen " + item.product
-                    )}
                     <button
                       type="button"
                       onClick={() => removeFromCartHandler(item.product)}

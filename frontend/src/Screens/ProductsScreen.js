@@ -34,7 +34,7 @@ function ProductsScreen(props) {
     return () => {
       //
     };
-  }, [sucessSave]);
+  }, [sucessSave, sucessDelete]);
   const openModal = (product) => {
     setmodalVisable(true);
     setId(product._id);
@@ -175,7 +175,7 @@ function ProductsScreen(props) {
         </div>
       )}
       <div className="product-list">
-        <table>
+        <table className="table">
           <thead>
             <tr>
               <th>Id</th>
@@ -187,9 +187,8 @@ function ProductsScreen(props) {
             </tr>
           </thead>
           <tbody>
-            {console.log("Log av products:" + JSON.stringify(products))}
             {products.map((product) => (
-              <tr>
+              <tr key={product._id}>
                 <td>{product._id}</td>
                 <td>{product.name}</td>
                 <td>{product.price}</td>
@@ -197,8 +196,15 @@ function ProductsScreen(props) {
                 <td> {product.category}</td>
                 <td>{product.brand}</td>
                 <td>
-                  <button onClick={() => openModal(product)}>Endre</button>
-                  <button onClick={() => deleteHandler(product)}>Delete</button>
+                  <button className="button" onClick={() => openModal(product)}>
+                    Endre
+                  </button>{" "}
+                  <button
+                    className="button"
+                    onClick={() => deleteHandler(product)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}

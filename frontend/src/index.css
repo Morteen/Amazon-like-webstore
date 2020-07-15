@@ -380,6 +380,10 @@ tbody > tr:nth-child(odd) {
 .placeorder-info > div:first-child {
   margin-top: 0;
 }
+#placeorder-info-list {
+  padding: 0;
+  list-style-type: none;
+}
 .placeorder-action > ul {
   padding: 0;
   list-style-type: none;

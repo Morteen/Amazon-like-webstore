@@ -9,10 +9,13 @@ import CartScreen from "./Screens/CartScreen";
 import SigninScreen from "./Screens/SigninScreen";
 import RegisterScreen from "./Screens/RegisterScreen";
 import ProductsScreen from "./Screens/ProductsScreen";
+import ShippingScreen from "./Screens/ShippingScreen";
+import PaymentScreen from "./Screens/PaymentScreen";
+import PlaceorderScreen from "./Screens/PlaceorderScreen";
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
-  const userInfo = userSignin;
+  const { userInfo } = userSignin;
 
   const openMenu = () => {
     document.querySelector(".sidebar").classList.add("open");
@@ -56,6 +59,9 @@ function App() {
 
         <main className="main">
           <div className="content">
+            <Route path="/placeorder" component={PlaceorderScreen} />
+            <Route path="/payment" component={PaymentScreen} />
+            <Route path="/shipping" component={ShippingScreen} />
             <Route path="/products" component={ProductsScreen} />
             <Route path="/register" component={RegisterScreen} />
             <Route path="/signin" component={SigninScreen} />

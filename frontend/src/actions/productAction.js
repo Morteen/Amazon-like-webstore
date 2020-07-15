@@ -13,7 +13,6 @@ import {
   PRODUCT_DELETE_SUCCESS,
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_FAIL,
-
 } from "../constants/productConstants";
 
 //Når det er gjort på denne måten får man med både tidn det tar å laste og suksess med lasting av prod eller feil !
@@ -76,9 +75,7 @@ const detailsProduct = (productId) => async (dispatch) => {
   }
 };
 
-
-const deleteProduct=(productId)=>{
-
+const deleteProduct = (productId) => async (dispatch) => {
   console.log("Log av productid i product action " + productId);
   try {
     dispatch({ type: PRODUCT_DELETE_REQUEST, payload: productId });
@@ -86,12 +83,10 @@ const deleteProduct=(productId)=>{
       "http://localhost:51031/api/Products/" + productId
     );
 
-    dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: data,success:true});
+    dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: data, success: true });
   } catch (error) {
     dispatch({ type: PRODUCT_DELETE_FAIL, payload: error.message });
   }
-
-
-}
+};
 
 export { listProducts, detailsProduct, saveProduct, deleteProduct };
