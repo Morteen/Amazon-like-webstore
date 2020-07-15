@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { listProducts, saveProduct } from "../actions/productAction";
+import { deleteProduct } from "../actions/productAction";
 
 function ProductsScreen(props) {
   const [modalVisable, setmodalVisable] = useState(false);
@@ -19,15 +20,21 @@ function ProductsScreen(props) {
 
   const productSave = useSelector((state) => state.productSave);
   const { loadingSave, success, sucessSave, errorSave } = productSave;
+
+  const productDelete = useSelector((state) => state.productDelete);
+  const { loadingDelete, sucessDelete, errorDelete } = productDelete;
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (sucessSave) {
+      setmodalVisable(false);
+    }
     dispatch(listProducts());
 
     return () => {
       //
     };
-  }, []);
+  }, [sucessSave]);
   const openModal = (product) => {
     setmodalVisable(true);
     setId(product._id);
@@ -54,6 +61,9 @@ function ProductsScreen(props) {
         description,
       })
     );
+  };
+  const deleteHandler = (product) => {
+    dispatch(deleteProduct(product._id));
   };
 
   return (
@@ -188,7 +198,7 @@ function ProductsScreen(props) {
                 <td>{product.brand}</td>
                 <td>
                   <button onClick={() => openModal(product)}>Endre</button>
-                  <button>Delete</button>
+                  <button onClick={() => deleteHandler(product)}>Delete</button>
                 </td>
               </tr>
             ))}

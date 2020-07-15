@@ -10,6 +10,10 @@ import {
   PRODUCT_SAVE_SUCCESS,
   PRODUCT_SAVE_REQUEST,
   PRODUCT_SAVE_FAIL,
+  PRODUCT_DELETE_SUCCESS,
+  PRODUCT_DELETE_REQUEST,
+  PRODUCT_DELETE_FAIL,
+
 } from "../constants/productConstants";
 
 //Når det er gjort på denne måten får man med både tidn det tar å laste og suksess med lasting av prod eller feil !
@@ -34,48 +38,17 @@ const saveProduct = (product) => async (dispatch, getState) => {
 
     if (product._id) {
       const { data } = await axios.put(
-        "http://localhost:51031/api/Products?name=" +
-          product.name +
-          "&category=" +
-          product.category +
-          "&image=" +
-          product.image +
-          "&price=" +
-          product.price +
-          "&brand=" +
-          product.brand +
-          "&countInStock=" +
-          product.countInStock +
-          "description=" +
-          product.description,
-        {
-          header: {
-            "Content-Type": "text/plain",
-            "Access-Control": "  Allow-Origin",
-          },
-        }
+        "http://localhost:51031/api/Products/" + product._id,
+        product
       );
       dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: data });
     } else {
       const { data } = await axios.post(
-        "http://localhost:51031/api/Products?name=" +
-          product.name +
-          "&category=" +
-          product.category +
-          "&image=" +
-          product.image +
-          "&price=" +
-          product.price +
-          "&brand=" +
-          product.brand +
-          "&countInStock=" +
-          product.countInStock +
-          "description=" +
-          product.description,
+        "http://localhost:51031/api/Products",
+        product,
         {
-          header: {
-            "Content-Type": "text/plain",
-            "Access-Control": "  Allow-Origin",
+          headers: {
+            "Content-Type": "application/json",
           },
         }
       );
@@ -103,4 +76,22 @@ const detailsProduct = (productId) => async (dispatch) => {
   }
 };
 
-export { listProducts, detailsProduct, saveProduct };
+
+const deleteProduct=(productId)=>{
+
+  console.log("Log av productid i product action " + productId);
+  try {
+    dispatch({ type: PRODUCT_DELETE_REQUEST, payload: productId });
+    const { data } = await axios.delete(
+      "http://localhost:51031/api/Products/" + productId
+    );
+
+    dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: data,success:true});
+  } catch (error) {
+    dispatch({ type: PRODUCT_DELETE_FAIL, payload: error.message });
+  }
+
+
+}
+
+export { listProducts, detailsProduct, saveProduct, deleteProduct };
