@@ -7,7 +7,7 @@ import {
   USER_REGISTER_FAIL,
 } from "../constants/userConstantes";
 
-function userSigninReducer(state = {}, action) {
+function userSigninReducer(state = { userInfo: {} }, action) {
   switch (action.type) {
     case USER_SIGNIN_REQUEST:
       return { loading: true };

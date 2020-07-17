@@ -9,7 +9,9 @@ function PlaceorderScreen(props) {
   const { cartItems, shipping, payment } = cart;
   const orderCreate = useSelector((state) => state.orderCreate);
   const { loading, success, error, order } = orderCreate;
-
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const { id, name } = userInfo;
   if (!shipping.adress) {
     props.history.push("/shipping");
   } else if (!payment.paymentMethod) {
@@ -29,8 +31,16 @@ function PlaceorderScreen(props) {
   }, [success]);
 
   const placeOrderHandler = () => {
+    console.log("log av id og navn" + id + "  " + name);
     dispatch(
-      createOrder({ cartItems, shipping, itemsPrice, shippingPrice, taxPrice })
+      createOrder({
+        userInfo,
+        orderItems: cartItems,
+        shipping,
+        itemsPrice,
+        shippingPrice,
+        taxPrice,
+      })
     );
   };
 
@@ -42,10 +52,12 @@ function PlaceorderScreen(props) {
           <div>
             <h3>Leverings info</h3>
             <ul id="placeorder-info-list">
+              Navn {userInfo.name}
               <li>Adresse: {cart.shipping.adress}</li>
               <li>
                 {cart.shipping.postalCode} {cart.shipping.city}{" "}
               </li>
+              <li>Email {userInfo.email}</li>
             </ul>
           </div>
           <div>
