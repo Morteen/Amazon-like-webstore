@@ -19,7 +19,7 @@ import {
 const listProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUST });
-    const { data } = await axios.get("http://localhost:51031/api/Products/");
+    const { data } = await axios.get("http://localhost:64105/api/Products/");
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
@@ -37,17 +37,19 @@ const saveProduct = (product) => async (dispatch, getState) => {
 
     if (product._id) {
       const { data } = await axios.put(
-        "http://localhost:51031/api/Products/" + product._id,
+        "http://localhost:64105/api/Products/" + product._id,
         product
       );
       dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: data });
     } else {
+      console.log("Vi kommer hit før det blir server error");
       const { data } = await axios.post(
-        "http://localhost:51031/api/Products",
+        "http://localhost:64105/api/Products",
         product,
         {
           headers: {
             "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "http://localhost:3000",
           },
         }
       );
@@ -62,11 +64,10 @@ const saveProduct = (product) => async (dispatch, getState) => {
 };
 
 const detailsProduct = (productId) => async (dispatch) => {
-  console.log("Log av productid i product action " + productId);
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
     const { data } = await axios.get(
-      "http://localhost:51031/api/Products/" + productId
+      "http://localhost:64105/api/Products/" + productId
     );
 
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
