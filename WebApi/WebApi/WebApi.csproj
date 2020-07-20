@@ -232,6 +232,22 @@
     <Compile Include="Migrations\202007171151122_DeletedShipping_Payment_orderToShipping.Designer.cs">
       <DependentUpon>202007171151122_DeletedShipping_Payment_orderToShipping.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007191548498_deleted_OrderId_in_payment.cs" />
+    <Compile Include="Migrations\202007191548498_deleted_OrderId_in_payment.Designer.cs">
+      <DependentUpon>202007191548498_deleted_OrderId_in_payment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007191550561_deleted_payment_in_Orders.cs" />
+    <Compile Include="Migrations\202007191550561_deleted_payment_in_Orders.Designer.cs">
+      <DependentUpon>202007191550561_deleted_payment_in_Orders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007191802091_deleted_orders_in_OrderToProduct.cs" />
+    <Compile Include="Migrations\202007191802091_deleted_orders_in_OrderToProduct.Designer.cs">
+      <DependentUpon>202007191802091_deleted_orders_in_OrderToProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007191813325_adding_Key_to_orderToProduct.cs" />
+    <Compile Include="Migrations\202007191813325_adding_Key_to_orderToProduct.Designer.cs">
+      <DependentUpon>202007191813325_adding_Key_to_orderToProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -350,6 +366,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007171151122_DeletedShipping_Payment_orderToShipping.resx">
       <DependentUpon>202007171151122_DeletedShipping_Payment_orderToShipping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007191548498_deleted_OrderId_in_payment.resx">
+      <DependentUpon>202007191548498_deleted_OrderId_in_payment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007191550561_deleted_payment_in_Orders.resx">
+      <DependentUpon>202007191550561_deleted_payment_in_Orders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007191802091_deleted_orders_in_OrderToProduct.resx">
+      <DependentUpon>202007191802091_deleted_orders_in_OrderToProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007191813325_adding_Key_to_orderToProduct.resx">
+      <DependentUpon>202007191813325_adding_Key_to_orderToProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

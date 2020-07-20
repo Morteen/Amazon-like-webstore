@@ -13,20 +13,21 @@ const createOrder = (order) => async (dispatch, getState) => {
     } = getState();
 
     //console.log("Log av ordre i createOrder: " + JSON.stringify(order));
-    const data = await Axios.post(
+    const { data } = await Axios.post(
       "http://localhost:64105/api/DtoOrder",
-      order,
+      order /*,
       {
         headers: {
           //Authorization: ' Bearer ' + userInfo.token
           Accept: "application/json",
         },
-      }
+      }*/
     );
-    const [newOrder] = data;
-    //console.log("Log av retur data " + JSON.stringify(data));
-    dispatch({ type: ORDER_CREATE_SUCCESS, payload: order });
+
+    console.log("Log av retur data " + JSON.stringify(data));
+    dispatch({ type: ORDER_CREATE_SUCCESS, payload: data });
   } catch (error) {
+    console.log(JSON.stringify("Log av error " + error));
     dispatch({ type: ORDER_CREATE_FAIL, payload: error.message });
   }
 };

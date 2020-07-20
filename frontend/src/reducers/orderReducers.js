@@ -10,6 +10,10 @@ function orderCreateReducer(state = {}, action) {
       return { loading: true };
 
     case ORDER_CREATE_SUCCESS:
+      console.log(
+        "Dette er hva som kommer til orderredcer" +
+          JSON.stringify(action.payload)
+      );
       return { loading: false, order: action.payload };
     case ORDER_CREATE_FAIL:
       return {

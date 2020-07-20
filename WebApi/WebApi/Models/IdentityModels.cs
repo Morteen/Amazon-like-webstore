@@ -26,6 +26,7 @@ namespace WebApi.Models
         public DbSet<Orders> Orders { get; set; }
         public DbSet<Payment> Payment { get; set; }
         public DbSet<Shipping> Shipping { get; set; }
+        public DbSet<OrderToProduct> OrderToProduct { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

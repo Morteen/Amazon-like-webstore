@@ -30,13 +30,13 @@ namespace WebApi.Models
         public int OrderToProductId { get; set; }
         [ForeignKey("Shipping")]
         public int ShippingId { get; set; }
-        [ForeignKey("Payment")]
+       // [ForeignKey("Payment")]
         public int PaymentId { get; set; }
         [ForeignKey("Users")]
         public int UserId { get; set; }
         public virtual ICollection<OrderToProduct> OrderToProduct { get; set; }
         public virtual Shipping Shipping { get; set; }
-        public virtual Payment Payment { get; set; }
+       // public virtual Payment Payment { get; set; }
         public virtual Users Users { get; set; }
 
 

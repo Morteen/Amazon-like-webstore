@@ -16,7 +16,7 @@ namespace WebApi.Models
         public string paymentMethod { get; set; }
 
         //Foregin key
-        public int OrderId { get; set; }
+       // public int OrderId { get; set; }
        // public virtual ICollection<Orders> Orders { get; set; }
 
     }
