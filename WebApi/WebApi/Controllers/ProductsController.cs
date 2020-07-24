@@ -101,19 +101,23 @@ namespace WebApi.Controllers
         }
 
         // PUT: api/Products/5
-        public IHttpActionResult Put( int id,[FromBody] Products product)
+        public IHttpActionResult Put( int id,[FromBody] DtoProducts product)
         {
+            var updatetProduct = DtoHelper.FromDtoProduct_To_Product(product);
             if (!ModelState.IsValid)
             {
                 return BadRequest("det er her det feiler: "+ModelState);
             }
 
-            if (id != product.productId)
+            if (id != product._id)
             {
                 return BadRequest("Sorry, seems something wrong. Couldn't deter mine record to update.");
             }
 
-            db.Entry(product).State = EntityState.Modified;
+            db.Entry(updatetProduct).State = EntityState.Modified;
+            db.SaveChanges();
+            product.product = product._id;
+          
 
             try
             {

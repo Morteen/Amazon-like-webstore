@@ -248,6 +248,14 @@
     <Compile Include="Migrations\202007191813325_adding_Key_to_orderToProduct.Designer.cs">
       <DependentUpon>202007191813325_adding_Key_to_orderToProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007220816496_deleteUserAvhengihet.cs" />
+    <Compile Include="Migrations\202007220816496_deleteUserAvhengihet.Designer.cs">
+      <DependentUpon>202007220816496_deleteUserAvhengihet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007230744509_vetikkehva.cs" />
+    <Compile Include="Migrations\202007230744509_vetikkehva.Designer.cs">
+      <DependentUpon>202007230744509_vetikkehva.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -378,6 +386,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007191813325_adding_Key_to_orderToProduct.resx">
       <DependentUpon>202007191813325_adding_Key_to_orderToProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007220816496_deleteUserAvhengihet.resx">
+      <DependentUpon>202007220816496_deleteUserAvhengihet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007230744509_vetikkehva.resx">
+      <DependentUpon>202007230744509_vetikkehva.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -30,7 +30,9 @@ namespace WebApi.Models.DTOModels
 
         public static Products FromDtoProduct_To_Product(DtoProducts DtoProd)
         {
+          
             var prod = new Products {
+                productId=DtoProd._id,
                 name = DtoProd.name,
                 price =DtoProd.price,
                 image =DtoProd.image,

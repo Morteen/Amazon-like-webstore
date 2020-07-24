@@ -12,7 +12,7 @@ const createOrder = (order) => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
 
-    //console.log("Log av ordre i createOrder: " + JSON.stringify(order));
+    console.log("Log av ordre i createOrder: " + JSON.stringify(order));
     const { data } = await Axios.post(
       "http://localhost:64105/api/DtoOrder",
       order /*,

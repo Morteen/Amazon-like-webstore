@@ -81,6 +81,9 @@ namespace WebApi.Controllers.DTOControllers
 
             newOrder.Taxprice = order.Taxprice;
             newOrder.UserId = order.UserInfo.id;
+            newOrder.TotalPrice = order.TotalPrice;
+            newOrder.ShippingPrice = order.ShippingPrice;
+
             newOrder.PaymentId = 1;
            
             
@@ -92,7 +95,7 @@ namespace WebApi.Controllers.DTOControllers
             db.Orders.Add(newOrder);
             db.SaveChanges();
             //Finner id for den nye orderen
-            var newOrderId = db.Orders.Find(db.Orders.ToList().Count - 1).OrderId;
+            var newOrderId = db.Orders.Max(x => x.OrderId);
             //Legger inn ordreId og productId inn i ordreToProduct
             foreach (int id in productId_for_OrderToProduct)
             {

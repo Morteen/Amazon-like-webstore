@@ -122,3 +122,5 @@ C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\Web
 C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\obj\Debug\WebApi.Migrations.deleted_payment_in_Orders.resources
 C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\obj\Debug\WebApi.Migrations.deleted_orders_in_OrderToProduct.resources
 C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\obj\Debug\WebApi.Migrations.adding_Key_to_orderToProduct.resources
+C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\obj\Debug\WebApi.Migrations.deleteUserAvhengihet.resources
+C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\obj\Debug\WebApi.Migrations.vetikkehva.resources

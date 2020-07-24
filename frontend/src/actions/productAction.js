@@ -40,6 +40,7 @@ const saveProduct = (product) => async (dispatch, getState) => {
         "http://localhost:64105/api/Products/" + product._id,
         product
       );
+      console.log("Log fra response på saveProduct " + JSON.stringify(data));
       dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: data });
     } else {
       console.log("Vi kommer hit før det blir server error");
@@ -69,7 +70,7 @@ const detailsProduct = (productId) => async (dispatch) => {
     const { data } = await axios.get(
       "http://localhost:64105/api/Products/" + productId
     );
-
+    console.log("Log fra action" + JSON.stringify(data));
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_DETAIL_FAIL, payload: error.message });
@@ -81,7 +82,7 @@ const deleteProduct = (productId) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DELETE_REQUEST, payload: productId });
     const { data } = await axios.delete(
-      "http://localhost:51031/api/Products/" + productId
+      "http://localhost:64105/api/Products/" + productId
     );
 
     dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: data, success: true });

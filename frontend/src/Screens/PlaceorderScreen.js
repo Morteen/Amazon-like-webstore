@@ -40,6 +40,7 @@ function PlaceorderScreen(props) {
         itemsPrice,
         shippingPrice,
         taxPrice,
+        totalPrice,
       })
     );
   };
