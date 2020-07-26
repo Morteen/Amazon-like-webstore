@@ -1,18 +1,24 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import CheckoutSteps from "../components/CheckoutSteps";
-import { createOrder } from "../actions/orderAction";
+import { detailsOrder } from "../actions/orderAction";
 
 function OrderScreen(props) {
   const orderDetails = useSelector((state) => state.orderDetails);
   const { loading, order, error } = orderDetails;
+
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const { name, email } = userInfo;
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    detailsorder(props.match.params.id);
-    return () => {
-      cleanup;
-    };
+    dispatch(detailsOrder(props.match.params.id));
+    return () => {};
   }, []);
+
+  const payNowHandler = () => {};
 
   return loading ? (
     <div>Loading.....</div>
@@ -26,9 +32,9 @@ function OrderScreen(props) {
             <h3>Leverings info</h3>
             <ul id="placeorder-info-list">
               Navn {userInfo.name}
-              <li>Adresse: {cart.shipping.adress}</li>
+              <li>Adresse: {order.shipping.adress}</li>
               <li>
-                {cart.shipping.postalCode} {cart.shipping.city}{" "}
+                {order.shipping.postalCode} {order.shipping.city}{" "}
               </li>
               <li>Email {userInfo.email}</li>
               <li>
@@ -40,7 +46,7 @@ function OrderScreen(props) {
           </div>
           <div>
             <h3>Betaling</h3>
-            Betalings metode: {cart.payment.paymentMethod}
+            Betalings metode: {order.payment.paymentMethod}
             <div>
               {order.isPaid ? "Betalt den" + order.paidAt : "Ikke betalt"}
             </div>
@@ -55,7 +61,7 @@ function OrderScreen(props) {
               {order.orderItems.length === 0 ? (
                 <div>Vognen er tom</div>
               ) : (
-                cartItems.map((item, index) => (
+                order.orderItems.map((item, index) => (
                   <li key={index}>
                     <div className="cart-image">
                       <img src={item.image} alt="Produkt" />
@@ -79,9 +85,9 @@ function OrderScreen(props) {
             <li>
               <button
                 className="button primary full-width"
-                onClick={placeOrderHandler}
+                onClick={payNowHandler}
               >
-                Send ordre
+                Betal nå
               </button>
             </li>
             <li>
@@ -89,21 +95,21 @@ function OrderScreen(props) {
             </li>
             <li>
               <div>Varer</div>
-              <div>{itemsPrice}</div>
+              <div>{order.itemsPrice}</div>
             </li>
             <li>
               <div>Moms</div>
-              <div>{taxPrice}</div>
+              <div>{order.taxPrice}</div>
             </li>
             <li>
               <div>Shipping</div>
 
-              <div>{shippingPrice}</div>
+              <div>{order.shippingPrice}</div>
             </li>
             <li>
               <div>Totaltsum</div>
 
-              <div>{totalPrice}</div>
+              <div>{order.totalPrice}</div>
             </li>
           </ul>
         </div>

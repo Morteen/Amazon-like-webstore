@@ -8,6 +8,19 @@ namespace WebApi.Models.DTOModels
     public class DtoHelper
     {
 
+        private Models.ApplicationDbContext db;
+
+        public DtoHelper()
+        {
+            db = new ApplicationDbContext();
+
+
+
+        }
+
+
+
+
         public static DtoProducts Product_To_DtoProd(Products product)
         {
 
@@ -46,6 +59,9 @@ namespace WebApi.Models.DTOModels
         }
 
 
+       
+
+
 
         public static List<DtoProducts> ProductList_To_DtoList(List<Products> productList)
         {
@@ -56,6 +72,40 @@ namespace WebApi.Models.DTOModels
             }
             return DtoList;
         }
+
+
+
+        //Order
+
+        public static DtoOrder FormOrder_to_DtoOrder(ApplicationDbContext db,Orders order)
+        {
+            var dtoOrder = new DtoOrder();
+            dtoOrder._Id = order.OrderId;
+            dtoOrder.DeliveredAt = order.DeliveredAt;
+            dtoOrder.IsDeliverd = order.IsDeliverd;
+            dtoOrder.IsPaid = order.IsPaid;
+            dtoOrder.PaidAt = order.PaidAt;
+            dtoOrder.ItemsPrice = order.ItemsPrice;
+            dtoOrder.Taxprice = order.Taxprice;
+            dtoOrder.TotalPrice = order.TotalPrice;
+            //Shipping
+            Shipping shippingInfo = db.Shipping.Find(order.ShippingId);
+            dtoOrder.Shipping.adress = shippingInfo.adress;
+            dtoOrder.Shipping.city = shippingInfo.city;
+            dtoOrder.Shipping.postalCode = shippingInfo.postalCode;
+            dtoOrder.Shipping.country = shippingInfo.country;
+            //payment Her må det legges data inni payment tabellen
+            dtoOrder.Payment.paymentMethod = "Vipps";
+            //orderitems
+            List<Products> itemList = new List<Products>();
+            itemList = db.Products.Where(p => p.productId == db.OrderToProduct.Where(o=>o.OrderId==order.OrderId).productId).ToList();// db.OrderToProduct.Where(otp => otp.OrderId == order.OrderId).Select(prod => prod.productId)).ToArray();
+            dtoOrder.orderItems = ProductList_To_DtoList(itemList).ToArray();
+
+
+
+            return dtoOrder;
+        }
+
 
     }
 }
