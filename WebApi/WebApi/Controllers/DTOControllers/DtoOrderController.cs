@@ -40,9 +40,18 @@ namespace WebApi.Controllers.DTOControllers
         }
 
         // GET: api/DtoOrder/5
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            var order = db.Orders.Find(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+       var dtoOrder= DtoHelper.FromOrder_to_DtoOrder(db,order);
+
+
+
+            return Ok(dtoOrder);
         }
 
         // POST: api/DtoOrder

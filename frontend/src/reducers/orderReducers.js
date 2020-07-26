@@ -32,7 +32,7 @@ function orderDetailsReducer(
   state = {
     order: {
       orderItems: [],
-      shipping: {},
+      Shipping: {},
       payment: {},
     },
   },

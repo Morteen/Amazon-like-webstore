@@ -27,6 +27,7 @@ namespace WebApi.Models.DTOModels
             DtoProducts DtoProd = new DtoProducts
             {
                 _id = product.productId,
+                product = product.productId,
                 name = product.name,
                 image = product.image,
                 category = product.category,
@@ -77,7 +78,7 @@ namespace WebApi.Models.DTOModels
 
         //Order
 
-        public static DtoOrder FormOrder_to_DtoOrder(ApplicationDbContext db,Orders order)
+        public static DtoOrder FromOrder_to_DtoOrder(ApplicationDbContext db,Orders order)
         {
             var dtoOrder = new DtoOrder();
             dtoOrder._Id = order.OrderId;
@@ -89,19 +90,44 @@ namespace WebApi.Models.DTOModels
             dtoOrder.Taxprice = order.Taxprice;
             dtoOrder.TotalPrice = order.TotalPrice;
             //Shipping
-            Shipping shippingInfo = db.Shipping.Find(order.ShippingId);
-            dtoOrder.Shipping.adress = shippingInfo.adress;
-            dtoOrder.Shipping.city = shippingInfo.city;
-            dtoOrder.Shipping.postalCode = shippingInfo.postalCode;
-            dtoOrder.Shipping.country = shippingInfo.country;
+           
+           var shippingInfo = db.Shipping.SingleOrDefault(s=>s.ShippingId==1);
+            if (shippingInfo != null) {
+                var newShipping = new DtoShipping();
+                newShipping.adress = shippingInfo.adress;
+                newShipping.city = shippingInfo.city;
+                newShipping.postalCode = shippingInfo.postalCode;
+                newShipping.country = shippingInfo.country;
+                dtoOrder.Shipping = newShipping;
+               
+            }
+
             //payment Her må det legges data inni payment tabellen
-            dtoOrder.Payment.paymentMethod = "Vipps";
+            var newPayment = new DtoPayment();
+            newPayment.paymentMethod= "Vipps";
+            dtoOrder.payment = newPayment;
             //orderitems
-            List<Products> itemList = new List<Products>();
-            itemList = db.Products.Where(p => p.productId == db.OrderToProduct.Where(o=>o.OrderId==order.OrderId).productId).ToList();// db.OrderToProduct.Where(otp => otp.OrderId == order.OrderId).Select(prod => prod.productId)).ToArray();
-            dtoOrder.orderItems = ProductList_To_DtoList(itemList).ToArray();
+              List<Products> itemList = new List<Products>();
+              //List<int>temList = new List<int>();
+              var tempList = db.OrderToProduct.Where(x => x.OrderId == order.OrderId).ToList();
+              foreach(OrderToProduct item in tempList)
+              {
+                  itemList.Add(db.Products.Find(item.productId));
+              }
 
+             // itemList = db.Products.Where(p => p.productId == db.OrderToProduct.Where(o=>o.OrderId==order.OrderId).productId).ToList();// db.OrderToProduct.Where(otp => otp.OrderId == order.OrderId).Select(prod => prod.productId)).ToArray();
+              dtoOrder.orderItems = ProductList_To_DtoList(itemList).ToArray();
 
+            //userInfo  
+            var user = db.Users.Find(order.UserId);
+            if (user != null)
+            {
+
+                var userInfo = new DtoUserInfo();
+                userInfo.name = user.name;
+                userInfo.email = user.email;
+                dtoOrder.UserInfo = userInfo;
+            }
 
             return dtoOrder;
         }

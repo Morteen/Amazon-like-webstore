@@ -11,7 +11,7 @@ namespace WebApi.Models.DTOModels
         public int _Id { get; set; }
         public DtoUserInfo UserInfo { get; set; }
        public  DtoShipping Shipping { get; set; }
-        public Payment Payment { get; set; }
+        public DtoPayment payment { get; set; }
 
         public DtoProducts[] orderItems { get; set; }
 

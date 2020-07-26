@@ -6,10 +6,16 @@ import { detailsOrder } from "../actions/orderAction";
 function OrderScreen(props) {
   const orderDetails = useSelector((state) => state.orderDetails);
   const { loading, order, error } = orderDetails;
-
+  var totalPrice = 0;
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const { name, email } = userInfo;
+  if (order) {
+    totalPrice = order.ItemsPrice + order.ShippingPrice;
+  } else {
+    totalPrice = 0;
+  }
+  ///const totalPrice = order.ItemsPrice + order.ShippingPrice;
 
   const dispatch = useDispatch();
 
@@ -31,12 +37,12 @@ function OrderScreen(props) {
           <div>
             <h3>Leverings info</h3>
             <ul id="placeorder-info-list">
-              Navn {userInfo.name}
-              <li>Adresse: {order.shipping.adress}</li>
+              Navn: {name}
+              <li>Adresse: {order.Shipping.adress}</li>
               <li>
-                {order.shipping.postalCode} {order.shipping.city}{" "}
+                {order.Shipping.postalCode} {order.Shipping.city}{" "}
               </li>
-              <li>Email {userInfo.email}</li>
+              <li>Email: {email}</li>
               <li>
                 {order.isDeliverd
                   ? "Levert den" + order.deliveredAt
@@ -95,21 +101,21 @@ function OrderScreen(props) {
             </li>
             <li>
               <div>Varer</div>
-              <div>{order.itemsPrice}</div>
+              <div>{order.ItemsPrice}</div>
             </li>
             <li>
               <div>Moms</div>
-              <div>{order.taxPrice}</div>
+              <div>{order.Taxprice}</div>
             </li>
             <li>
               <div>Shipping</div>
 
-              <div>{order.shippingPrice}</div>
+              <div>{order.ShippingPrice}</div>
             </li>
             <li>
               <div>Totaltsum</div>
 
-              <div>{order.totalPrice}</div>
+              <div>{totalPrice}</div>
             </li>
           </ul>
         </div>
