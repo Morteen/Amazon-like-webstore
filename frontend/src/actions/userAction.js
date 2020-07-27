@@ -7,6 +7,10 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
+  USER_LOGOUT,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAIL,
 } from "../constants/userConstantes";
 
 const sigin = (email, password) => async (dispatch) => {
@@ -44,4 +48,24 @@ const register = (name, email, password) => async (dispatch) => {
   }
 };
 
-export { sigin, register };
+const logout = (dispatch) => {
+  Cookie.remove("userInfo");
+  dispatch({ type: USER_LOGOUT });
+};
+
+const update = (userId, name, email, password) => async (dispatch) => {
+  dispatch({ type: USER_UPDATE_REQUEST, payload: { email, password } });
+
+  try {
+    const { data } = await Axios.put(
+      "http://localhost:51031/api/User/User" + userId,
+      { name, email, password }
+    );
+    dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
+    Cookie.set("userInfo", JSON.stringify(data));
+  } catch (error) {
+    dispatch({ type: USER_UPDATE_FAIL, payload: error.message });
+  }
+};
+
+export { sigin, register, logout, update };

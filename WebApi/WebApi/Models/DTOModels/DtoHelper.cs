@@ -88,7 +88,8 @@ namespace WebApi.Models.DTOModels
             dtoOrder.PaidAt = order.PaidAt;
             dtoOrder.ItemsPrice = order.ItemsPrice;
             dtoOrder.Taxprice = order.Taxprice;
-            dtoOrder.TotalPrice = order.TotalPrice;
+            dtoOrder.ShippingPrice = order.ShippingPrice;
+            dtoOrder.TotalPrice = order.ShippingPrice + order.ItemsPrice;
             //Shipping
            
            var shippingInfo = db.Shipping.SingleOrDefault(s=>s.ShippingId==1);

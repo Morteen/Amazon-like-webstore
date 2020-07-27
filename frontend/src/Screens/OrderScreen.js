@@ -5,22 +5,27 @@ import { detailsOrder, payOrder } from "../actions/orderAction";
 import PaypalButton from "../components/PaypalButton";
 
 function OrderScreen(props) {
+  const orderPay = useSelector((state) => state.orderPay);
+  const {
+    loading: loadingPay,
+    success: successPay,
+    error: errorPay,
+  } = orderPay;
   const orderDetails = useSelector((state) => state.orderDetails);
   const { loading, order, error } = orderDetails;
-  var totalPrice = 0;
+
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const { name, email } = userInfo;
-  if (order) {
-    totalPrice = order.ItemsPrice + order.ShippingPrice;
-  } else {
-    totalPrice = 0;
-  }
+
   ///const totalPrice = order.ItemsPrice + order.ShippingPrice;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (successPay) {
+      props.history.push("/profile");
+    }
     dispatch(detailsOrder(props.match.params.id));
     return () => {};
   }, []);
@@ -94,7 +99,7 @@ function OrderScreen(props) {
             <li className="placeorder-actions-payment">
               {!order.isPaid && (
                 <PaypalButton
-                  amount={totalPrice}
+                  amount={order.TotalPrice}
                   onSuccess={handleSuccessPayment}
                 />
               )}
@@ -118,7 +123,7 @@ function OrderScreen(props) {
             <li>
               <div>Totaltsum</div>
 
-              <div>{totalPrice}</div>
+              <div>{order.TotalPrice}</div>
             </li>
           </ul>
         </div>

@@ -18,9 +18,9 @@ function PlaceorderScreen(props) {
     props.history.push("/payment");
   }
   const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
-  const shippingPrice = itemsPrice > 1000 ? 0 : 150;
+  const ShippingPrice = itemsPrice > 1000 ? 0 : 150;
   const taxPrice = itemsPrice * 0.25;
-  const totalPrice = itemsPrice + shippingPrice;
+  const totalPrice = itemsPrice + ShippingPrice;
 
   const dispatch = useDispatch();
 
@@ -38,7 +38,7 @@ function PlaceorderScreen(props) {
         orderItems: cartItems,
         shipping,
         itemsPrice,
-        shippingPrice,
+        ShippingPrice,
         taxPrice,
         totalPrice,
       })
@@ -118,7 +118,7 @@ function PlaceorderScreen(props) {
             <li>
               <div>Shipping</div>
 
-              <div>{shippingPrice}</div>
+              <div>{ShippingPrice}</div>
             </li>
             <li>
               <div>Totaltsum</div>
