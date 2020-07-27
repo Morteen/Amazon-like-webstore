@@ -5,6 +5,9 @@ import {
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_SUCCESS,
   ORDER_DETAILS_FAIL,
+  ORDER_PAY_REQUEST,
+  ORDER_PAY_SUCCESS,
+  ORDER_PAY_FAIL,
 } from "../constants/orderConstantes";
 
 function orderCreateReducer(state = {}, action) {
@@ -58,4 +61,34 @@ function orderDetailsReducer(
   }
 }
 
-export { orderCreateReducer, orderDetailsReducer };
+function orderPayReducer(
+  state = {
+    order: {
+      orderItems: [],
+      Shipping: {},
+      payment: {},
+    },
+  },
+  action
+) {
+  switch (action.type) {
+    case ORDER_PAY_REQUEST:
+      return { loading: true };
+
+    case ORDER_PAY_SUCCESS:
+      console.log(
+        "Dette er hva som kommer til orderPayredcer" +
+          JSON.stringify(action.payload)
+      );
+      return { loading: false, success: true };
+    case ORDER_PAY_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+}
+
+export { orderCreateReducer, orderDetailsReducer, orderPayReducer };
