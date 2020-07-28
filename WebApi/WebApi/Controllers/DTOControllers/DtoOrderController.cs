@@ -89,7 +89,7 @@ namespace WebApi.Controllers.DTOControllers
              };
 
             newOrder.Taxprice = order.Taxprice;
-            newOrder.UserId = order.UserInfo.id;
+            newOrder.UserId = order.UserInfo.UserId;
             newOrder.TotalPrice = order.TotalPrice;
             newOrder.ShippingPrice = order.ShippingPrice;
 
@@ -122,7 +122,7 @@ namespace WebApi.Controllers.DTOControllers
             //lager et object for å sende tilbake som bekreftelse
             var DtoResponseOrder = new DtoOrder {
                 _Id = newOrderId,
-                UserInfo = new DtoUserInfo {id =order.UserInfo.id,name=order.UserInfo.name,email=order.UserInfo.email},
+                UserInfo = new DtoUserInfo { UserId = order.UserInfo.UserId, name=order.UserInfo.name,email=order.UserInfo.email},
                 orderItems = productResponseList.ToArray(),
                 Shipping = new DtoShipping{adress= order.Shipping.adress, city= order.Shipping.city},
                 ItemsPrice=order.ItemsPrice,

@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout, update } from "../actions/userAction";
 
 function ProfileScreen(props) {
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const { loading, success, error } = userUpdate;
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,7 +13,8 @@ function ProfileScreen(props) {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatchEvent(logout());
+    dispatch(logout());
+    props.history.push("/");
   };
   const submitHandler = (e) => {
     e.preventDefault();
@@ -24,11 +28,12 @@ function ProfileScreen(props) {
           <form onSubmit={submitHandler}>
             <ul className="form-container">
               <li>
-                <h2>Registrer deg her</h2>
+                <h2>Endre kunde opplysninger her</h2>
               </li>
               <li>
                 {loading && <div>Laster...</div>}
                 {error && <div>{error}</div>}
+                {success && <div>Oppdateringen av profilen er lagret</div>}
               </li>
               <li>
                 <label htmlFor="name">Navn</label>
@@ -55,16 +60,6 @@ function ProfileScreen(props) {
                   name="password"
                   id="password"
                   onChange={(e) => setPassword(e.target.value)}
-                ></input>
-              </li>
-
-              <li>
-                <label htmlFor="rePassword">Gjenta passord</label>
-                <input
-                  type="password"
-                  name="rePassword"
-                  id="rePassword"
-                  onChange={(e) => setRePassword(e.target.value)}
                 ></input>
               </li>
 

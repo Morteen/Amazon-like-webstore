@@ -37,7 +37,7 @@ function App() {
           <div className="header-links">
             <Link to="cart">Handlevogn</Link>
 
-            {userInfo.name ? (
+            {userInfo ? (
               <Link to="/profile">{userInfo.name}</Link>
             ) : (
               <Link to="/signin">Sign In</Link>

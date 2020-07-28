@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using WebApi.Models;
+using WebApi.Models.DTOModels;
 
 namespace WebApi.Controllers
 {
@@ -111,8 +113,30 @@ namespace WebApi.Controllers
         }
 
         // PUT: api/User/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put(int id, [FromBody]DtoUserInfo dtoUser)
         {
+            var updatetUser = db.Users.Find(id);
+            if (updatetUser == null || updatetUser.UserId!=dtoUser.UserId)
+            {
+                return Content(HttpStatusCode.NotFound, "Vi kan ikke finne denne brukeren");
+            }
+            if (!String.IsNullOrEmpty(dtoUser.name)) {
+                updatetUser.name = dtoUser.name;
+            }
+            if (!String.IsNullOrEmpty(dtoUser.email)) {
+                updatetUser.email = dtoUser.email;
+            }
+            if (!String.IsNullOrEmpty(dtoUser.password))
+            {
+                updatetUser.password = dtoUser.password;
+            }
+        
+
+            db.Entry(updatetUser).State = EntityState.Modified;
+            db.SaveChanges();
+
+            //var UpdatedUser =DtoHelper.
+            return Ok(dtoUser);
         }
 
         // DELETE: api/User/5
