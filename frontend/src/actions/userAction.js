@@ -24,6 +24,7 @@ const sigin = (email, password) => async (dispatch) => {
         password
     );
     dispatch({ type: USER_SIGIN_SUCCESS, payload: data });
+    console.log("Data ved login:" + data);
     Cookie.set("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({ type: USER_SIGIN_FAIL, payload: error.message });
@@ -53,16 +54,33 @@ const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT });
 };
 
-const update = (userId, name, email, password) => async (dispatch) => {
+const update = (UserId, name, email, password) => async (
+  dispatch,
+  getState
+) => {
+  const {
+    userSignin: { userinfo },
+  } = getState();
   dispatch({
     type: USER_UPDATE_REQUEST,
-    payload: { userId, name, email, password },
+    payload: { UserId, name, email, password },
   });
 
   try {
     const { data } = await Axios.put(
-      "http://localhost:64105/api/User/" + userId,
-      { userId, name, email, password }
+      "http://localhost:64105/api/User/" + UserId,
+      {
+        UserId,
+        name,
+        email,
+        password,
+      } /*,
+      {
+        headers: {
+          //Authorization: ' Bearer ' + userInfo.token
+          Accept: "application/json",
+        },
+      }*/
     );
     dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
     Cookie.set("userInfo", JSON.stringify(data));

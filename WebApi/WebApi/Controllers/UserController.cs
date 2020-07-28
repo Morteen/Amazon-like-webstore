@@ -55,7 +55,8 @@ namespace WebApi.Controllers
             {
                 return Content(HttpStatusCode.NotFound, "Denne medlemmen finner vi ikke");
             }
-            return Ok(user);
+            var dtoUser = new DtoUserInfo { UserId = user.UserId, name = user.name, email = user.email, password = user.password };
+            return Ok(dtoUser);
         }
 
 

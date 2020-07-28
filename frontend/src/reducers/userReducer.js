@@ -11,7 +11,7 @@ import {
   USER_UPDATE_FAIL,
 } from "../constants/userConstantes";
 
-function userSigninReducer(state = { userInfo: {} }, action) {
+function userSigninReducer(state = {}, action) {
   switch (action.type) {
     case USER_SIGNIN_REQUEST:
       return { loading: true };
@@ -41,7 +41,7 @@ function userRegisterReducer(state = {}, action) {
   }
 }
 
-function userUpdateReducer(state = { userInfo: {} }, action) {
+function userUpdateReducer(state = {}, action) {
   switch (action.type) {
     case USER_UPDATE_REQUEST:
       return { loading: true };

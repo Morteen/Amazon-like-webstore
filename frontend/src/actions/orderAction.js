@@ -8,6 +8,9 @@ import {
   ORDER_PAY_REQUEST,
   ORDER_PAY_SUCCESS,
   ORDER_PAY_FAIL,
+  MY_ORDER_LIST_REQUEST,
+  MY_ORDER_LIST_SUCCESS,
+  MY_ORDER_LIST_FAIL,
 } from "../constants/orderConstantes";
 import Axios from "axios";
 
@@ -87,4 +90,28 @@ const payOrder = (order, paymentResult) => async (dispatch, getState) => {
   }
 };
 
-export { createOrder, detailsOrder, payOrder };
+const listMyOrders = () => async (dispatch, getState) => {
+  try {
+    const {
+      userSignin: { userInfo },
+    } = getState();
+
+    dispatch({ type: MY_ORDER_LIST_REQUEST });
+    const { data } = await Axios.get(
+      "http://localhost:64105/api/DtoOrder"
+    ); /** {
+    headers: {
+      Authorization: ' Bearer ' + userInfo.token
+     
+    },
+  } */
+
+    console.log("Log av returdata i orderDetails" + JSON.stringify(data));
+    dispatch({ type: MY_ORDER_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    console.log(JSON.stringify("Log av error i orderDetails " + error));
+    dispatch({ type: MY_ORDER_LIST_FAIL, payload: error.message });
+  }
+};
+
+export { createOrder, detailsOrder, payOrder, listMyOrders };
