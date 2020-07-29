@@ -90,6 +90,15 @@ namespace WebApi.Models.DTOModels
             dtoOrder.Taxprice = order.Taxprice;
             dtoOrder.ShippingPrice = order.ShippingPrice;
             dtoOrder.TotalPrice = order.ShippingPrice + order.ItemsPrice;
+            if (order.CreatedAt == null)
+            {
+                dtoOrder.CreatedAt = DateTime.Now.ToString();
+            }
+            else
+            {
+                dtoOrder.CreatedAt = order.CreatedAt.ToShortDateString();
+            }
+            
             //Shipping
            
            var shippingInfo = db.Shipping.SingleOrDefault(s=>s.ShippingId==1);

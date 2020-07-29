@@ -19,6 +19,7 @@ namespace WebApi.Models.DTOModels
         public double ItemsPrice { get; set; }
         public double Taxprice { get; set; }
         public double ShippingPrice { get; set; }
+
         public double TotalPrice { get; set; }
         [DefaultValue(false)]
         public bool IsPaid { get; set; }
@@ -27,6 +28,7 @@ namespace WebApi.Models.DTOModels
         [DefaultValue(false)]
         public bool IsDeliverd { get; set; }
         public string DeliveredAt { get; set; }
+        public string CreatedAt { get; set; }
 
 
     }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 
 import { BrowserRouter, Route, Link } from "react-router-dom";
@@ -14,10 +14,17 @@ import PaymentScreen from "./Screens/PaymentScreen";
 import PlaceorderScreen from "./Screens/PlaceorderScreen";
 import OrderScreen from "./Screens/OrderScreen";
 import ProfileScreen from "./Screens/ProfileScreen";
+import OrdersScreen from "./Screens/OrdersScreen";
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const { loading, success, error } = userUpdate;
+
+  useEffect(() => {
+    return () => {};
+  }, [success]);
 
   const openMenu = () => {
     document.querySelector(".sidebar").classList.add("open");
@@ -42,6 +49,18 @@ function App() {
             ) : (
               <Link to="/signin">Sign In</Link>
             )}
+            {userInfo && userInfo.isAdmin && (
+              <div className="dropdown">
+                <a href="#">Admin</a>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to="/orders">Ordre</Link>
+
+                    <Link to="/products">Produkter</Link>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </header>
         <aside className="sidebar">
@@ -61,6 +80,7 @@ function App() {
 
         <main className="main">
           <div className="content">
+            <Route path="/orders" component={OrdersScreen} />
             <Route path="/profile" component={ProfileScreen} />
             <Route path="/order/:id" component={OrderScreen} />
             <Route path="/placeorder" component={PlaceorderScreen} />

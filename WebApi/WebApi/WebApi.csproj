@@ -214,6 +214,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DTOControllers\DtoOrderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PaymentConfigController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -256,6 +257,10 @@
     <Compile Include="Migrations\202007230744509_vetikkehva.cs" />
     <Compile Include="Migrations\202007230744509_vetikkehva.Designer.cs">
       <DependentUpon>202007230744509_vetikkehva.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007291038300_CreatedAt__Orders.cs" />
+    <Compile Include="Migrations\202007291038300_CreatedAt__Orders.Designer.cs">
+      <DependentUpon>202007291038300_CreatedAt__Orders.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -394,6 +399,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007230744509_vetikkehva.resx">
       <DependentUpon>202007230744509_vetikkehva.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007291038300_CreatedAt__Orders.resx">
+      <DependentUpon>202007291038300_CreatedAt__Orders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

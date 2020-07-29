@@ -124,3 +124,4 @@ C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\Web
 C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\obj\Debug\WebApi.Migrations.adding_Key_to_orderToProduct.resources
 C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\obj\Debug\WebApi.Migrations.deleteUserAvhengihet.resources
 C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\obj\Debug\WebApi.Migrations.vetikkehva.resources
+C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\obj\Debug\WebApi.Migrations.CreatedAt__Orders.resources

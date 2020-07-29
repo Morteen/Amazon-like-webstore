@@ -55,7 +55,7 @@ namespace WebApi.Controllers
             {
                 return Content(HttpStatusCode.NotFound, "Denne medlemmen finner vi ikke");
             }
-            var dtoUser = new DtoUserInfo { UserId = user.UserId, name = user.name, email = user.email, password = user.password };
+            var dtoUser = new DtoUserInfo { UserId = user.UserId, name = user.name, email = user.email, password = user.password,isAdmin=user.isAdmin};
             return Ok(dtoUser);
         }
 
@@ -131,12 +131,15 @@ namespace WebApi.Controllers
             {
                 updatetUser.password = dtoUser.password;
             }
+          
+
         
 
             db.Entry(updatetUser).State = EntityState.Modified;
             db.SaveChanges();
 
             //var UpdatedUser =DtoHelper.
+            dtoUser.isAdmin = updatetUser.isAdmin;
             return Ok(dtoUser);
         }
 

@@ -23,6 +23,8 @@ namespace WebApi.Models
         public string PaidAt { get; set; }
         [DefaultValue(false)]
         public bool IsDeliverd { get; set; }
+
+        public DateTime CreatedAt { get; set; }
         public string DeliveredAt { get; set; }
 
         // Foreign Keys

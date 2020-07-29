@@ -34,9 +34,10 @@ namespace WebApi.Controllers.DTOControllers
 
 
         // GET: api/DtoOrder
-        public IEnumerable<string> Get()
+        public IHttpActionResult  Get()
         {
-            return new string[] { "value1", "value2" };
+            var orderlist = db.Orders.ToList();
+            return Ok();
         }
 
         // GET: api/DtoOrder/5
@@ -92,7 +93,7 @@ namespace WebApi.Controllers.DTOControllers
             newOrder.UserId = order.UserInfo.UserId;
             newOrder.TotalPrice = order.TotalPrice;
             newOrder.ShippingPrice = order.ShippingPrice;
-
+            newOrder.CreatedAt = DateTime.Now;
             newOrder.PaymentId = 1;
            
             
@@ -120,15 +121,17 @@ namespace WebApi.Controllers.DTOControllers
                 productResponseList.Add( DtoHelper.Product_To_DtoProd(db.Products.SingleOrDefault(x=>x.productId==prod.productId)));
             }
             //lager et object for å sende tilbake som bekreftelse
-            var DtoResponseOrder = new DtoOrder {
+            var DtoResponseOrder = new DtoOrder
+            {
                 _Id = newOrderId,
-                UserInfo = new DtoUserInfo { UserId = order.UserInfo.UserId, name=order.UserInfo.name,email=order.UserInfo.email},
+                UserInfo = new DtoUserInfo { UserId = order.UserInfo.UserId, name = order.UserInfo.name, email = order.UserInfo.email },
                 orderItems = productResponseList.ToArray(),
-                Shipping = new DtoShipping{adress= order.Shipping.adress, city= order.Shipping.city},
-                ItemsPrice=order.ItemsPrice,
-                ShippingPrice=order.ShippingPrice,
+                Shipping = new DtoShipping { adress = order.Shipping.adress, city = order.Shipping.city },
+                ItemsPrice = order.ItemsPrice,
+                ShippingPrice = order.ShippingPrice,
                 Taxprice = order.Taxprice,
-                TotalPrice =order.TotalPrice
+                TotalPrice = order.TotalPrice,
+                CreatedAt = DateTime.Now.ToString(),
             };
             if (DtoResponseOrder == null)
             {
@@ -145,8 +148,20 @@ namespace WebApi.Controllers.DTOControllers
         }
 
         // DELETE: api/DtoOrder/5
-        public void Delete(int id)
+        [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
+        public IHttpActionResult Delete(int id)
         {
+            var order = db.Orders.Find(id);
+            if (order == null)
+            {
+                  return Content(HttpStatusCode.NotFound, "Beklager denne orderen finner vi ikke");
+            }
+
+            db.Orders.Remove(order);
+            db.SaveChanges();
+            var DtoDeletedOrder = DtoHelper.FromOrder_to_DtoOrder(db,order);
+            return Ok(DtoDeletedOrder);
+
         }
     }
 }

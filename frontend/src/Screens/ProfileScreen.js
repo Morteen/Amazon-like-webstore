@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { logout, update } from "../actions/userAction";
 import { listMyOrders } from "../actions/orderAction";
 
 function ProfileScreen(props) {
   const userUpdate = useSelector((state) => state.userUpdate);
-  const { loading, success, error } = userUpdate;
+  const { loading, success: successUpdate, error } = userUpdate;
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const { UserId } = userInfo;
@@ -35,7 +36,7 @@ function ProfileScreen(props) {
     }
     dispatch(listMyOrders());
     return () => {};
-  }, []);
+  }, [successUpdate]);
 
   return (
     <div className="profile">
@@ -49,7 +50,9 @@ function ProfileScreen(props) {
               <li>
                 {loading && <div>Laster...</div>}
                 {error && <div>{error}</div>}
-                {success && <div>Oppdateringen av profilen er lagret</div>}
+                {successUpdate && (
+                  <div>Oppdateringen av profilen er lagret</div>
+                )}
               </li>
               <li>
                 <label htmlFor="name">Navn</label>
@@ -102,7 +105,38 @@ function ProfileScreen(props) {
           </form>
         </div>
       </div>
-      <div className="profile-orders"></div>
+      <div className="profile-orders content-margined">
+        {loadingOrders ? (
+          <div>Loading....</div>
+        ) : errorOrders ? (
+          <div>{errorOrders}</div>
+        ) : (
+          <table className="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Dato</th>
+                <th>Total pris</th>
+                <th>Betalt</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order._Id}>
+                  <td>{order._Id}</td>
+                  <td>Tenger en verdi her</td>
+                  <td>{order.TotalPrice}</td>
+                  <td>{order.IsPaid ? "Ja" : "Nei"}</td>
+                  <td>
+                    <Link to={"/order/" + order._Id}>Ordre detaljer</Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 }
