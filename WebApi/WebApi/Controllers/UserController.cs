@@ -49,7 +49,7 @@ namespace WebApi.Controllers
 
         public IHttpActionResult GetAllUsers(string email, string password)
         {
-
+            
             var user = db.Users.SingleOrDefault(x => x.email == email && x.password == password);
             if (user == null)
             {

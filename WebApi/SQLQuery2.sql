@@ -6,7 +6,7 @@ SELECT * FROM dbo.Payments
 SELECT * FROM Products
 SELECT COUNT(*) FROM orders WHERE userid=2
 
-UPDATE Orders
-SET CreatedAt =GETDATE()
+UPDATE Users
+SET email = 'morten@webshop.no'
 
-WHERE OrderId IN(3,5,8)
+WHERE UserId=2

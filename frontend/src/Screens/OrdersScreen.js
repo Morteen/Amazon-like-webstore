@@ -4,7 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { listOrders, deleteOrder } from "../actions/orderAction";
 
 function OrdersScreen(props) {
-  const [modalVisable, setmodalVisable] = useState(false);
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const { isAdmin } = userInfo;
+
   const orderList = useSelector((state) => state.orderList);
   const { loading, orders, error } = orderList;
   const orderDelete = useSelector((state) => state.orderDelete);
@@ -30,12 +33,12 @@ function OrdersScreen(props) {
 
   return loading ? (
     <div>Loading...</div>
-  ) : (
+  ) : isAdmin ? (
     <div className="content content-margined">
       <div className="order-header">
         <h3>Orders</h3>
       </div>
-
+      {console.log("Log av isAdmin:" + isAdmin)}
       <div className="order-list">
         <table className="table">
           <thead>
@@ -80,6 +83,8 @@ function OrdersScreen(props) {
         </table>
       </div>
     </div>
+  ) : (
+    <div>Dette er en Admin side gå tilbake</div>
   );
 }
 export default OrdersScreen;

@@ -23,6 +23,10 @@ function ProductsScreen(props) {
 
   const productDelete = useSelector((state) => state.productDelete);
   const { loadingDelete, sucessDelete, errorDelete } = productDelete;
+
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const { isAdmin } = userInfo;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -66,7 +70,7 @@ function ProductsScreen(props) {
     dispatch(deleteProduct(product._id));
   };
 
-  return (
+  return isAdmin ? (
     <div className="content content-margined">
       <div className="product-header">
         <h3>Varer</h3>
@@ -212,6 +216,8 @@ function ProductsScreen(props) {
         </table>
       </div>
     </div>
+  ) : (
+    <div>Dette er en admin side gå tilbake</div>
   );
 }
 export default ProductsScreen;
