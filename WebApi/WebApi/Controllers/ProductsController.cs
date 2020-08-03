@@ -64,7 +64,50 @@ namespace WebApi.Controllers
            return DtoHelper.ProductList_To_DtoList(db.Products.ToList()) ;
             
         }
-        
+        // GET: api/Products/5
+        public IHttpActionResult GetSortetProducts(string category,string searchKeyword,string sortOrder)
+        {
+            var productList = new List<Products>();
+            productList = db.Products.ToList();
+
+             if (!string.IsNullOrEmpty(category))//|| string.IsNullOrEmpty(category)
+             {
+                 productList = productList.Where(p => p.category == category).ToList();
+             }
+             
+             var searchedProductList = new List<Products>();
+             if (!string.IsNullOrEmpty(searchKeyword))
+             {
+
+                productList = productList.Where(p=>p.brand.Contains(searchKeyword)|| p.description.Contains(searchKeyword)||p.name.Contains(searchKeyword)).ToList();
+             } 
+            var SortedproductList = new List<Products>();
+            if (!string.IsNullOrEmpty(sortOrder))
+             {
+                 if (sortOrder == "highest")
+                 {
+                    //productList = null;
+                    productList = productList.OrderByDescending(p => p.price).ToList();
+                }
+                 else if(sortOrder == "lowest")
+                 {
+                    productList = productList.OrderBy(p => p.price).ToList();
+
+                }
+             }
+
+            
+            if (productList == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(DtoHelper.ProductList_To_DtoList(productList));
+            //return Ok(sortOrder);
+          
+        }
+
+
 
         // GET: api/Products/5
         public IHttpActionResult Get(int id)
@@ -75,6 +118,9 @@ namespace WebApi.Controllers
                 return NotFound();
             }
            var DtoProd= DtoHelper.Product_To_DtoProd(product);
+            var reviewsList = db.Reviews.Where(r => r.productId == id).ToList();
+            DtoProd.reviews = reviewsList.ToArray();
+
             return Ok(DtoProd);
         }
 

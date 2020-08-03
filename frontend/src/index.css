@@ -143,6 +143,9 @@ a > .rating > span:last-child {
   color: #ffffff;
   cursor: pointer;
 }
+.sidebar h3 {
+  padding-left: 2rem;
+}
 .sidebar {
   position: fixed;
   transition: all 0.5s;
@@ -443,7 +446,7 @@ tbody > tr:nth-child(odd) {
   list-style-type: none;
   padding: 0;
   margin: 1rem auto;
-  max-width: 45rem;
+  max-width: 50rem;
   justify-content: space-between;
   align-items: center;
 }
@@ -457,6 +460,7 @@ tbody > tr:nth-child(odd) {
 }
 .categories {
   padding: 0;
+  padding-left: 2rem;
   list-style-type: none;
 }
 .categories a {

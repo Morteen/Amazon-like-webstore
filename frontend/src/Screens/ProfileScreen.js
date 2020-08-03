@@ -5,39 +5,36 @@ import { logout, update } from "../actions/userAction";
 import { listMyOrders } from "../actions/orderAction";
 
 function ProfileScreen(props) {
-  const userUpdate = useSelector((state) => state.userUpdate);
-  const { loading, success: successUpdate, error } = userUpdate;
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
-  const { UserId } = userInfo;
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [email, setEmail] = useState("");
   const dispatch = useDispatch();
 
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const handleLogout = () => {
     dispatch(logout());
     props.history.push("/signin");
   };
   const submitHandler = (e) => {
     e.preventDefault();
-
-    dispatch(update(UserId, name, email, password));
+    dispatch(update(userInfo.UserId, name, email, password)); //UserId, name, email, password
   };
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const { loading, success, error } = userUpdate;
+
   const myOrderList = useSelector((state) => state.myOrderList);
   const { loading: loadingOrders, orders, error: errorOrders } = myOrderList;
-
   useEffect(() => {
     if (userInfo) {
-      setName(userInfo.name);
+      console.log(userInfo.name);
       setEmail(userInfo.email);
+      setName(userInfo.name);
       setPassword(userInfo.password);
     }
     dispatch(listMyOrders());
     return () => {};
-  }, [successUpdate]);
-
+  }, [userInfo]);
   return (
     <div className="profile">
       <div className="profile-info">
@@ -50,9 +47,7 @@ function ProfileScreen(props) {
               <li>
                 {loading && <div>Laster...</div>}
                 {error && <div>{error}</div>}
-                {successUpdate && (
-                  <div>Oppdateringen av profilen er lagret</div>
-                )}
+                {success && <div>Oppdateringen av profilen er lagret</div>}
               </li>
               <li>
                 <label htmlFor="name">Navn</label>
@@ -125,7 +120,7 @@ function ProfileScreen(props) {
               {orders.map((order) => (
                 <tr key={order._Id}>
                   <td>{order._Id}</td>
-                  <td>Tenger en verdi her</td>
+                  <td>{order.CreatedAt}</td>
                   <td>{order.TotalPrice}</td>
                   <td>{order.IsPaid ? "Ja" : "Nei"}</td>
                   <td>

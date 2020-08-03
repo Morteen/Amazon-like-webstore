@@ -214,9 +214,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DTOControllers\DtoOrderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PaymentConfigController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -262,6 +264,10 @@
     <Compile Include="Migrations\202007291038300_CreatedAt__Orders.Designer.cs">
       <DependentUpon>202007291038300_CreatedAt__Orders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007301302141_ReviewClass.cs" />
+    <Compile Include="Migrations\202007301302141_ReviewClass.Designer.cs">
+      <DependentUpon>202007301302141_ReviewClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -277,6 +283,7 @@
     <Compile Include="Models\payment.cs" />
     <Compile Include="Models\PaymentConfig.cs" />
     <Compile Include="Models\Products.cs" />
+    <Compile Include="Models\Reviews.cs" />
     <Compile Include="Models\Shipping.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -342,6 +349,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Userimage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -402,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007291038300_CreatedAt__Orders.resx">
       <DependentUpon>202007291038300_CreatedAt__Orders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007301302141_ReviewClass.resx">
+      <DependentUpon>202007301302141_ReviewClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -33,9 +33,16 @@ namespace WebApi.Models.DTOModels
                 category = product.category,
                 price = product.price,
                 brand = product.brand,
+            
+                numRew=product.numRew,
                 countInStock = product.countInStock,
                 description = product.description
             };
+            if (product.rating >= 1 && product.numRew >= 1) {
+                DtoProd.rating = product.rating / product.numRew;
+
+            }
+            else { DtoProd.rating = 0; }
 
 
 

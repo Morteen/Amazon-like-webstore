@@ -13,13 +13,29 @@ import {
   PRODUCT_DELETE_SUCCESS,
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_FAIL,
+  PRODUCT_REVIEW_SAVE_REQUEST,
+  PRODUCT_REVIEW_SAVE_SUCCESS,
+  PRODUCT_REVIEW_SAVE_FAIL,
+  PRODUCT_REVIEW_SAVE_RESET,
 } from "../constants/productConstants";
 
 //Når det er gjort på denne måten får man med både tidn det tar å laste og suksess med lasting av prod eller feil !
-const listProducts = () => async (dispatch) => {
+
+const listProducts = (
+  category = "",
+  searchKeyword = "",
+  sortOrder = ""
+) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUST });
-    const { data } = await axios.get("http://localhost:64105/api/Products/");
+    const { data } = await axios.get(
+      "http://localhost:64105/api/Products?category=" +
+        category +
+        "&searchKeyword=" +
+        searchKeyword +
+        "&sortOrder=" +
+        sortOrder
+    );
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
@@ -70,7 +86,7 @@ const detailsProduct = (productId) => async (dispatch) => {
     const { data } = await axios.get(
       "http://localhost:64105/api/Products/" + productId
     );
-    console.log("Log fra action" + JSON.stringify(data));
+
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_DETAIL_FAIL, payload: error.message });
@@ -91,4 +107,32 @@ const deleteProduct = (productId) => async (dispatch) => {
   }
 };
 
-export { listProducts, detailsProduct, saveProduct, deleteProduct };
+const saveProducktReview = (review) => async (dispatch, getState) => {
+  try {
+    const {
+      userSignin: { userinfo },
+    } = getState();
+    dispatch({ type: PRODUCT_REVIEW_SAVE_REQUEST, pyload: review });
+    const { data } = await axios.post(
+      "http://localhost:64105/api/Review",
+      review
+    ); /*,
+{
+  headers: {
+    //Authorization: ' Bearer ' + userInfo.token
+    Accept: "application/json",
+  },
+}*/
+    dispatch({ type: PRODUCT_REVIEW_SAVE_SUCCESS, pyload: data });
+  } catch (error) {
+    dispatch({ type: PRODUCT_REVIEW_SAVE_FAIL, pyload: error.message });
+  }
+};
+
+export {
+  listProducts,
+  detailsProduct,
+  saveProduct,
+  deleteProduct,
+  saveProducktReview,
+};

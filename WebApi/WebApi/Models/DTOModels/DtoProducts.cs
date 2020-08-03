@@ -18,6 +18,7 @@ namespace WebApi.Models.DTOModels
         public int numRew { get; set; }
         public int countInStock { get; set; }
         public string description { get; set; }
+        public Reviews[] reviews { get; set; }
 
     }
 }

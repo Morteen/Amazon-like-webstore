@@ -22,10 +22,14 @@ namespace WebApi
 
           
             config.EnableCors();
-           
+
             config.Formatters.JsonFormatter.SupportedMediaTypes
                .Add(new MediaTypeHeaderValue("text/html"));
-            
+            config.Formatters.JsonFormatter.SupportedMediaTypes
+            .Add(new System.Net.Http.Headers.MediaTypeHeaderValue("multipart/form-data"));
+
+
+
 
 
             config.MapHttpAttributeRoutes();

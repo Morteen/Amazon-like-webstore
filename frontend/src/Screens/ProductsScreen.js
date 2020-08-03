@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { listProducts, saveProduct } from "../actions/productAction";
 import { deleteProduct } from "../actions/productAction";
+import Axios from "axios";
 
 function ProductsScreen(props) {
   const [modalVisable, setmodalVisable] = useState(false);
@@ -27,6 +28,8 @@ function ProductsScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const { isAdmin } = userInfo;
+  const [uploading, setUploading] = useState(false);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -68,6 +71,29 @@ function ProductsScreen(props) {
   };
   const deleteHandler = (product) => {
     dispatch(deleteProduct(product._id));
+  };
+  const uploadFileHandler = (e) => {
+    const file = e.target.files[0];
+
+    const bodyFormData = new FormData();
+
+    bodyFormData.append("image", file);
+    for (var [key, value] of bodyFormData.entries()) {
+      console.log(key, value);
+    }
+    setUploading(true);
+    Axios.post("http://localhost:64105/api/Image", bodyFormData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then((response) => {
+        console.log("Server response på formData:" + response.data);
+        setImage(response.data);
+        setUploading(false);
+      })
+      .catch((error) => {
+        console.log("Log av error i fileupload:" + error);
+        setUploading(false);
+      });
   };
 
   return isAdmin ? (
@@ -118,6 +144,9 @@ function ProductsScreen(props) {
                   id="image"
                   onChange={(e) => setImage(e.target.value)}
                 ></input>
+
+                <input type="file" onChange={uploadFileHandler}></input>
+                {uploading && <div>Laster opp bilde !</div>}
               </li>
 
               <li>
@@ -221,17 +250,3 @@ function ProductsScreen(props) {
   );
 }
 export default ProductsScreen;
-/* {products.map((product) => (
-              <tr>
-                <td>{product.id}</td>
-                <td>{product.name}</td>
-                <td>{product.price}</td>
-
-                <td> {product.category}</td>
-                <td>{product.brand}</td>
-                <td>
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </td>
-              </tr>
-            ))}*/

@@ -87,7 +87,7 @@ namespace WebApi.Controllers
             var emailExist = db.Users.Any(x => x.email == email);
             if (emailExist)
             {
-                return Content(HttpStatusCode.NotFound, "Denne epost adressen er allerede registrert");
+                return Content(HttpStatusCode.BadRequest, "Denne epost adressen er allerede registrert");
             }
             else
             {

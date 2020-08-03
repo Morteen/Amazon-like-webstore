@@ -19,12 +19,6 @@ import OrdersScreen from "./Screens/OrdersScreen";
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
-  const userUpdate = useSelector((state) => state.userUpdate);
-  const { loading, success, error } = userUpdate;
-
-  useEffect(() => {
-    return () => {};
-  }, [success]);
 
   const openMenu = () => {
     document.querySelector(".sidebar").classList.add("open");
@@ -64,16 +58,16 @@ function App() {
           </div>
         </header>
         <aside className="sidebar">
-          <h3>kategorier</h3>
+          <h3> Kategorier</h3>
           <button className="sidebar-close-button" onClick={closeMenu}>
             x
           </button>
-          <ul>
+          <ul className="categories">
             <li>
-              <a href="index.html"> Skjorter</a>
+              <Link to="/category/shirt"> Skjorter</Link>
             </li>
             <li>
-              <a href="index.html"> Bukser</a>
+              <Link to="/category/pants"> Bukser</Link>
             </li>
           </ul>
         </aside>
@@ -91,6 +85,7 @@ function App() {
             <Route path="/signin" component={SigninScreen} />
             <Route path="/product/:id" component={ProductScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
+            <Route path="/category/:id?" component={HomeScreen} />
             <Route path="/" exact={true} component={HomeScreen} />
           </div>
         </main>

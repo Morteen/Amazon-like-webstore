@@ -29,6 +29,13 @@ function RegisterScreen(props) {
     e.preventDefault();
     dispatch(register(name, email, password));
   };
+  const translateError = (error) => {
+    if (error === "Request failed with status code 400") {
+      return "Denne mail adressen er allerede registrert";
+    } else {
+      return error;
+    }
+  };
 
   return (
     <div className="form">
@@ -39,7 +46,7 @@ function RegisterScreen(props) {
           </li>
           <li>
             {loading && <div>Laster...</div>}
-            {error && <div>{error}</div>}
+            {error && <div className="alert">{translateError(error)}</div>}
           </li>
           <li>
             <label htmlFor="name">Navn</label>
