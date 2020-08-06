@@ -7,6 +7,8 @@ import { PRODUCT_REVIEW_SAVE_RESET } from "../constants/productConstants";
 
 function ProductScreen(props) {
   const [qty, setQty] = useState(1);
+  const [imageName, setImageName] = useState("");
+
   const productDetails = useSelector((state) => state.productDetails);
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -17,7 +19,7 @@ function ProductScreen(props) {
   const [rating, setRating] = useState(0);
   const productSaveReview = useSelector((state) => state.productSaveReview);
   const { success: productSaveSuccess } = productSaveReview;
-
+  let image = null;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,6 +49,18 @@ function ProductScreen(props) {
       })
     );
   };
+  const test = () => {
+    image = product.image;
+
+    return image;
+  };
+  const changePicHandler = () => {
+    if (image) {
+      image = image.substring(0, 10) + "2.jpg";
+    }
+
+    console.log(image);
+  };
 
   return (
     <div>
@@ -63,6 +77,7 @@ function ProductScreen(props) {
             <div className="details-image">
               <img src={product.image} alt="Product" />
             </div>
+
             <div className="details-info">
               <ul>
                 <li>

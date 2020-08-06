@@ -37,7 +37,9 @@ function HomeScreen(props) {
 
   return (
     <div>
-      {category && <h2>{translateCategory(category)}</h2>}
+      {category && (
+        <h2 className="categories">{translateCategory(category)}</h2>
+      )}
       <ul className="filter">
         <li>
           <form onSubmit={submitHandler}>
@@ -74,6 +76,7 @@ function HomeScreen(props) {
                   className="product-image"
                 />
               </Link>
+
               <div className="product-name">
                 <Link to={"/product/" + product._id}> {product.name}</Link>
               </div>
@@ -93,24 +96,3 @@ function HomeScreen(props) {
   );
 }
 export default HomeScreen;
-
-/* <ul className="filter">
-    <li>
-      <form onSubmit={submitHandler}>
-        <input
-          name="searchKeyword"
-          onChange={(e) => setSearchKeyword(e.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
-    </li>
-    <li>
-      <select name="sortOrder" onChange={sortHandler}>
-        <option value="">Nyest</option>
-        <option value="lowest">lavest</option>
-        <option value="highest">Høyest</option>
-      </select>
-    </li>
-  </ul>;*/
-
-/**/

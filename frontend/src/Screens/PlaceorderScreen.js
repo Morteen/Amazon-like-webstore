@@ -31,7 +31,6 @@ function PlaceorderScreen(props) {
   }, [success]);
 
   const placeOrderHandler = () => {
-    console.log("log av id og navn" + id + "  " + name);
     dispatch(
       createOrder({
         userInfo,
@@ -41,6 +40,7 @@ function PlaceorderScreen(props) {
         ShippingPrice,
         taxPrice,
         totalPrice,
+        // paymentMethod: payment.paymentMethod,
       })
     );
   };

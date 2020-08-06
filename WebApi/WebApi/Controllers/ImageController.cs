@@ -131,16 +131,17 @@ namespace WebApi.Controllers
 
 
 
-                           var filePath = HttpContext.Current.Server.MapPath("~/Userimage/" + postedFile.FileName + extension);
-                            postedFile.SaveAs(filePath);
+                           //var filePath = HttpContext.Current.Server.MapPath("~/Userimage/" + postedFile.FileName + extension);
+                            //postedFile.SaveAs(filePath);
 
-                           // var filePath2 = HttpContext.Current.Server.MapPath("~/Amazon-like-webstore/frontend/public/images" + postedFile.FileName + extension);
-                            //postedFile.SaveAs(filePath2);
-        // var message = string.Format("Test beskjed");
-        // dict.Add("Test", message);
-        // return Request.CreateResponse(HttpStatusCode.Accepted, dict);
+                             var filePath2 = HttpContext.Current.Server.MapPath("~/React/WebShop/Amazon/Amazon-like-webstore/frontend/public/images/" + postedFile.FileName + extension);//
+                            string physicalPath = System.IO.Path.GetFullPath("~/React/WebShop/Amazon/Amazon-like-webstore/frontend/public/images/" + postedFile.FileName);
+                            postedFile.SaveAs(physicalPath);
+                            var message = string.Format(filePath2+" eller "+ physicalPath);
+                             dict.Add("Test", message);
+                             return Request.CreateResponse(HttpStatusCode.Accepted, dict);
 
-    }
+                        }
                     }
 
                     var message1 = string.Format("Image Updated Successfully.");
@@ -153,7 +154,7 @@ namespace WebApi.Controllers
             catch (Exception ex)
             {
                 var res = string.Format("some Message");
-                dict.Add("error", res);
+                dict.Add("error:"+ ex.Data.ToString(), res);
                 return Request.CreateResponse(HttpStatusCode.NotFound, dict);
             }
         }

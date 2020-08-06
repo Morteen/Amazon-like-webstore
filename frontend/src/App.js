@@ -64,10 +64,16 @@ function App() {
           </button>
           <ul className="categories">
             <li>
-              <Link to="/category/shirt"> Skjorter</Link>
+              <Link to="/category/shirt" onClick={closeMenu}>
+                {" "}
+                Skjorter
+              </Link>
             </li>
             <li>
-              <Link to="/category/pants"> Bukser</Link>
+              <Link to="/category/pants" onClick={closeMenu}>
+                {" "}
+                Bukser
+              </Link>
             </li>
           </ul>
         </aside>
