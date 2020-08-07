@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { detailsOrder, payOrder } from "../actions/orderAction";
 import PaypalButton from "../components/PaypalButton";
+import Loader from "../components/Loader";
 
 function OrderScreen(props) {
   const orderPay = useSelector((state) => state.orderPay);
@@ -35,9 +36,9 @@ function OrderScreen(props) {
   };
 
   return loading ? (
-    <div>Loading.....</div>
+    <Loader />
   ) : error ? (
-    <div>{error}</div>
+    <div className="error">{error}</div>
   ) : (
     <div>
       <div className="placeorder">

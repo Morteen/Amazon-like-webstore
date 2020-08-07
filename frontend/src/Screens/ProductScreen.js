@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { detailsProduct, saveProducktReview } from "../actions/productAction";
 import Rating from "../components/Rating";
 import { PRODUCT_REVIEW_SAVE_RESET } from "../constants/productConstants";
+import Loader from "../components/Loader";
 
 function ProductScreen(props) {
   const [qty, setQty] = useState(1);
@@ -68,9 +69,9 @@ function ProductScreen(props) {
         <Link to="/">Tilbake</Link>
       </div>
       {loading ? (
-        <div>Loading...</div>
+        <Loader />
       ) : error ? (
-        <div>{error}</div>
+        <div className="error">{error}</div>
       ) : (
         <div>
           <div className="details">

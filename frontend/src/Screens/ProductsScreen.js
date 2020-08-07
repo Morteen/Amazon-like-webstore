@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { listProducts, saveProduct } from "../actions/productAction";
 import { deleteProduct } from "../actions/productAction";
 import Axios from "axios";
+import Loader from "../components/Loader";
 
 function ProductsScreen(props) {
   const [modalVisable, setmodalVisable] = useState(false);
@@ -112,8 +113,8 @@ function ProductsScreen(props) {
                 <h2>{id ? "Endre produktet" : "Legg inn et nytt produkt"}</h2>
               </li>
               <li>
-                {loadingSave && <div>Laster...</div>}
-                {errorSave && <div>{error}</div>}
+                {loadingSave && <Loader />}
+                {errorSave && <div className="error">{error}</div>}
               </li>
               <li>
                 <label htmlFor="name">Navn</label>

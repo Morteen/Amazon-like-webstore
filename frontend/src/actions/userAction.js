@@ -42,7 +42,10 @@ const register = (name, email, password) => async (dispatch) => {
         "&password=" +
         password
     );
-    dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
+    setTimeout(() => {
+      dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
+    }, 3000);
+    //dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
     Cookie.set("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({ type: USER_REGISTER_FAIL, payload: error.message });

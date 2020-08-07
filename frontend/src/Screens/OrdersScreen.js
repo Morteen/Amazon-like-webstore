@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { listOrders, deleteOrder } from "../actions/orderAction";
+import Loader from "../components/Loader";
 
 function OrdersScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
@@ -32,7 +33,7 @@ function OrdersScreen(props) {
   };
 
   return loading ? (
-    <div>Loading...</div>
+    <Loader />
   ) : isAdmin ? (
     <div className="content content-margined">
       <div className="order-header">

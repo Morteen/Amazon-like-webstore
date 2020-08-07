@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../actions/userAction";
+import Loader from "../components/Loader";
 
 function RegisterScreen(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
+  const [inputError, setInputError] = useState();
 
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, userInfo, error } = userRegister;
@@ -27,7 +29,14 @@ function RegisterScreen(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(register(name, email, password));
+    if (name === "" || password === "" || email === "" || rePassword === "") {
+      setInputError("Alle felt må fylles ut");
+    } else if (password !== rePassword) {
+      setInputError("Passordene er ikke like");
+      alert(inputError);
+    } else {
+      dispatch(register(name, email, password));
+    }
   };
   const translateError = (error) => {
     if (error === "Request failed with status code 400") {
@@ -45,8 +54,9 @@ function RegisterScreen(props) {
             <h2>Registrer deg her</h2>
           </li>
           <li>
-            {loading && <div>Laster...</div>}
+            {loading && <Loader />}
             {error && <div className="alert">{translateError(error)}</div>}
+            {inputError && <div className="alert">{inputError}</div>}
           </li>
           <li>
             <label htmlFor="name">Navn</label>

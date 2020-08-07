@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { sigin } from "../actions/userAction";
+import Loader from "../components/Loader";
 
 function SigninScreen(props) {
   const [email, setEmail] = useState("");
@@ -34,8 +35,8 @@ function SigninScreen(props) {
             <h2>Logg inn</h2>
           </li>
           <li>
-            {loading && <div>Laster...</div>}
-            {error && <div>{error}</div>}
+            {loading && <Loader />}
+            {error && <div className="alert">{error}</div>}
           </li>
           <li>
             <label htmlFor="email">Email</label>

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout, update } from "../actions/userAction";
 import { listMyOrders } from "../actions/orderAction";
+import Loader from "../components/Loader";
 
 function ProfileScreen(props) {
   const [name, setName] = useState("");
@@ -45,8 +46,8 @@ function ProfileScreen(props) {
                 <h2>Endre kunde opplysninger her</h2>
               </li>
               <li>
-                {loading && <div>Laster...</div>}
-                {error && <div>{error}</div>}
+                {loading && <Loader />}
+                {error && <div className="error">{error}</div>}
                 {success && <div>Oppdateringen av profilen er lagret</div>}
               </li>
               <li>

@@ -62,7 +62,7 @@ function HomeScreen(props) {
         </li>
       </ul>
 
-      {loading ? ( //Loading må være med her siden det er asynk og man få undifined feil på map funksjonen
+      {loading ? ( //Loading må være med her siden det er asynk og man få undefined feil på map funksjonen
         <Loader />
       ) : error ? (
         <div className="error">{error}</div>
