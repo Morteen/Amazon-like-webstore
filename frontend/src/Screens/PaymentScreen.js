@@ -5,13 +5,18 @@ import CheckoutSteps from "../components/CheckoutSteps";
 
 function PaymentScreen(props) {
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [inputError, setInputError] = useState();
+
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("betalings metode" + paymentMethod);
-    dispatch(savePayment({ paymentMethod }));
-    props.history.push("placeorder");
+    if (paymentMethod === "") {
+      setInputError("Du må velge en betalingsmetode");
+    } else {
+      dispatch(savePayment({ paymentMethod }));
+      props.history.push("placeorder");
+    }
   };
 
   return (
@@ -24,7 +29,7 @@ function PaymentScreen(props) {
             <li>
               <h2>Betaling</h2>
             </li>
-
+            <li>{inputError && <div className="alert">{inputError}</div>}</li>
             <li>
               <input
                 type="radio"

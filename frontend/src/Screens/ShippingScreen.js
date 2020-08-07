@@ -7,14 +7,18 @@ function ShippingScreen(props) {
   const [adress, setAdress] = useState("");
   const [city, setCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
+  const [inputError, setInputError] = useState();
 
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    dispatch(saveShipping({ adress, city, postalCode }));
-    props.history.push("payment");
+    if (adress === "" || city === "" || postalCode === "") {
+      setInputError("Alle felt må fylles ut");
+    } else {
+      dispatch(saveShipping({ adress, city, postalCode }));
+      props.history.push("payment");
+    }
   };
 
   return (
@@ -27,7 +31,7 @@ function ShippingScreen(props) {
             <li>
               <h2>Shipping</h2>
             </li>
-
+            <li>{inputError && <div className="alert">{inputError}</div>}</li>
             <li>
               <label htmlFor="adress">Adresse</label>
               <input

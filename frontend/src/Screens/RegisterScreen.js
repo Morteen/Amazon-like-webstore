@@ -45,6 +45,7 @@ function RegisterScreen(props) {
       return error;
     }
   };
+  ////
 
   return (
     <div className="form">

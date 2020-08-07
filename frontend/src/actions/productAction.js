@@ -36,10 +36,8 @@ const listProducts = (
         "&sortOrder=" +
         sortOrder
     );
-    setTimeout(() => {
-      dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
-    }, 3000);
-    //dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+
+    dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
   }
