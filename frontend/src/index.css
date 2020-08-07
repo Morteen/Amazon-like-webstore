@@ -471,3 +471,15 @@ tbody > tr:nth-child(odd) {
 .categories a:hover {
   background-color: #c0c0c0;
 }
+.loading {
+  position: fixed; /* or absolute */
+  top: 50%;
+  left: 50%;
+}
+.error {
+  position: fixed; /* or absolute */
+  top: 50%;
+  left: 50%;
+  color: red;
+  font-weight: bolder;
+}

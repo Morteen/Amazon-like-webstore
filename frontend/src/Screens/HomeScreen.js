@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { listProducts } from "../actions/productAction";
 import Rating from "../components/Rating";
+import Loader from "../components/Loader";
 
 function HomeScreen(props) {
   const category = props.match.params.id ? props.match.params.id : "";
@@ -62,9 +63,9 @@ function HomeScreen(props) {
       </ul>
 
       {loading ? ( //Loading må være med her siden det er asynk og man få undifined feil på map funksjonen
-        <div>Loading....</div>
+        <Loader />
       ) : error ? (
-        <div>{error}</div>
+        <div className="error">{error}</div>
       ) : (
         <ul className="products">
           {products.map((product, index) => (
