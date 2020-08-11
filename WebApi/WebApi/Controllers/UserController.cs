@@ -55,7 +55,8 @@ namespace WebApi.Controllers
             {
                 return Content(HttpStatusCode.NotFound, "Denne medlemmen finner vi ikke");
             }
-            var dtoUser = new DtoUserInfo { UserId = user.UserId, name = user.name, email = user.email, password = user.password,isAdmin=user.isAdmin};
+            var token = MyTokenManager.GenerateToken(user.email);
+            var dtoUser = new DtoUserInfo { UserId = user.UserId, name = user.name, email = user.email, password = user.password,isAdmin=user.isAdmin,token=token};
             return Ok(dtoUser);
         }
 
@@ -114,6 +115,7 @@ namespace WebApi.Controllers
         }
 
         // PUT: api/User/5
+        [CustomAuthenticationFilter]
         public IHttpActionResult Put(int id, [FromBody]DtoUserInfo dtoUser)
         {
             var updatetUser = db.Users.Find(id);

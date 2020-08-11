@@ -62,8 +62,10 @@ const update = (UserId, name, email, password) => async (
   getState
 ) => {
   const {
-    userSignin: { userinfo },
+    userSignin: { userInfo },
   } = getState();
+  const { token } = userInfo;
+  console.log("Log av userInfo.Token i update action :" + userInfo.token);
   dispatch({
     type: USER_UPDATE_REQUEST,
     payload: { UserId, name, email, password },
@@ -77,13 +79,14 @@ const update = (UserId, name, email, password) => async (
         name,
         email,
         password,
-      } /*,
+        token,
+      },
       {
         headers: {
-          //Authorization: ' Bearer ' + userInfo.token
+          Authorization: " Bearer " + userInfo.token,
           Accept: "application/json",
         },
-      }*/
+      }
     );
     dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
     Cookie.set("userInfo", JSON.stringify(data));

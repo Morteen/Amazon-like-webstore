@@ -126,3 +126,11 @@ C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\Web
 C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\obj\Debug\WebApi.Migrations.vetikkehva.resources
 C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\obj\Debug\WebApi.Migrations.CreatedAt__Orders.resources
 C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\obj\Debug\WebApi.Migrations.ReviewClass.resources
+C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\bin\Microsoft.IdentityModel.Logging.xml
+C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\morten.olsen\source\repos\React\WebShop\Amazon\Amazon-like-webstore\WebApi\WebApi\bin\System.IdentityModel.Tokens.Jwt.xml
